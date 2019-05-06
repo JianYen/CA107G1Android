@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_mem"
+        android:icon="@drawable/ic_news"
+        android:title="最新消息" />
+    <item
+        android:id="@+id/nav_news"
+        android:icon="@drawable/ic_menu_gallery"
+        android:title="關於我們" />
+    </group>
+    <group>
+        <item
+            android:title=""/>
+        <item
+            android:title=""/>
+        <item
+            android:title=""/>
+        <item
+            android:title=""/>
+        <item
+            android:title=""/>
+        <item
+            android:title=""/>
+        <item
+            android:title=""/>
+        <item
+            android:title=""/>
+
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/empLogin"
+            android:icon="@drawable/ic_emp"
+            android:title="員工登入"/>
+    </group>
+
+</menu>

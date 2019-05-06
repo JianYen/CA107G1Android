@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:title="首頁"
+        android:icon="@drawable/homepage_icon"
+        />
+
+    <item
+        android:id="@+id/nav_hotel"
+        android:title="住宿"
+        android:icon="@drawable/ic_hotel"
+        />
+
+    <item
+        android:id="@+id/nav_shop"
+        android:title="我的"
+        android:icon="@drawable/ic_order"/>
+
+
+</menu>

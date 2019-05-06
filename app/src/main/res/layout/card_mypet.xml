@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/myPetCard"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:elevation="3dp"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="#ffdddd">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/petImg"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_gravity="left|center"
+        android:layout_margin="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/petName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/petBreed"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/petBirth"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"/>
+
+
+        </LinearLayout>
+
+</LinearLayout>
+
+</android.support.v7.widget.CardView>
