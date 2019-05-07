@@ -296,7 +296,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Building the url to the web service
         String url2 = "https://maps.googleapis.com/maps/api/directions/"
-                + output + "?" + parameters;
+                + output + "?" + parameters+"&key=AIzaSyAQW56GMYrNIjHGWr_gMMA6T8CI-SMkmS8";
         System.out.println("getDerectionsURL--->: " + url2);
         url = url2;
 //        return url;
