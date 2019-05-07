@@ -64,8 +64,9 @@ public class Fragment_HotelPage extends Fragment {
         hotelBanner.setImageLoader(new GlideImageLoader());
         List<Integer> list = new ArrayList<>();
 
-        list.add(R.drawable.beauty);
-        list.add(R.drawable.pet3);
+        list.add(R.drawable.ad);
+        list.add(R.drawable.ad2);
+        list.add(R.drawable.ad3);
         hotelBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR).setImages(list).isAutoPlay(true)
         .setDelayTime(2000).start();
 

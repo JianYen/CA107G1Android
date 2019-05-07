@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:orientation="horizontal"
-    card_view:cardBackgroundColor="#ff8c00"
+    card_view:cardBackgroundColor="#f0ffff"
     card_view:cardCornerRadius="5dp">
 
     <!-- cardCornerRadius：設定卡片邊角弧度-->

@@ -46,6 +46,7 @@ public class CredicardPay extends AppCompatActivity {
         card6 = findViewById(R.id.card6);
 
         sharedPreferences = getSharedPreferences(Util.PREF_FILE, MODE_PRIVATE);
+        
     }
 
 

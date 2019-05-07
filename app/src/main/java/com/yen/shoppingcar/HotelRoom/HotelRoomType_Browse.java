@@ -28,7 +28,7 @@ import com.yen.shoppingcar.myServer.ServerURL;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class HotelRoomType_Browse extends AppCompatActivity {
+public class    HotelRoomType_Browse extends AppCompatActivity {
     private static final String TAG = "HotelRoomType";
     private RecyclerView hotelRoomTypeRcview;
     private CommonTask getRoomTypeTask;

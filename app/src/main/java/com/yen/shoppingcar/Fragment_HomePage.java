@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.yen.shoppingcar.VO.HomePageVO;
 import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
@@ -25,8 +24,8 @@ import java.util.List;
 
 
 public class Fragment_HomePage extends Fragment {
-    Banner banner;
-
+   private Banner banner;
+private ImageView homePageImg;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,19 +45,7 @@ public class Fragment_HomePage extends Fragment {
 
         recyclerView.setAdapter(new HomePageAdapter(hpList));
 
-        banner = view.findViewById(R.id.hPbr);
-        banner.setImageLoader(new GlideImageLoader());
-        List<Integer> list = new ArrayList<>();
-        list.add(R.drawable.beauty);
-        list.add(R.drawable.beauty2);
-//        list.add("https://imgur.dcard.tw/5Ju2c2t.jpg");
-//        list.add("https://cdn2.ettoday.net/images/1943/d1943865.jpg");
-//        list.add("https://video.nextmag.com.tw/photo/2016/07/14/1_1468495982439_606484_ver1.0.jpg");
-        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-        banner.setImages(list);
-        banner.isAutoPlay(true);
-        banner.setDelayTime(2000);
-        banner.start();
+
         return view;
     }
 

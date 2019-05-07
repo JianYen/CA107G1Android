@@ -1,6 +1,7 @@
 package com.yen.shoppingcar.Shop;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,14 +24,16 @@ import com.yen.shoppingcar.Util;
 import com.yen.shoppingcar.VO.ShopItemVO;
 import com.yen.shoppingcar.myServer.CallServletItem;
 import com.yen.shoppingcar.myServer.ServerURL;
+import com.yen.shoppingcar.myServer.ShopItemImgTask;
 
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class MyShopItem_Browse extends AppCompatActivity {
-    StaggeredGridLayoutManager staggeredGridLayoutManager;
-    ImageView sort;
+    private StaggeredGridLayoutManager staggeredGridLayoutManager;
+    private ImageView sort;
+    private ShopItemImgTask shopItemImgTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,7 @@ public class MyShopItem_Browse extends AppCompatActivity {
         try {
             List<ShopItemVO> shopItemVO = gson.fromJson(callServlet.execute(ServerURL.Shop_URL).get(), listType);
             Log.e("121321321231321321", shopItemVO.toString());
-            recyclerView.setAdapter(new ShopItemBrowseAdapter(shopItemVO));
+            recyclerView.setAdapter(new ShopItemBrowseAdapter(this, shopItemVO));
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -78,9 +81,15 @@ public class MyShopItem_Browse extends AppCompatActivity {
 
     private class ShopItemBrowseAdapter extends RecyclerView.Adapter<ShopItemBrowseAdapter.ViewHolder> {
         private List<ShopItemVO> teamList;
+        private int imageSize;
+        private Context context;
+        private LayoutInflater inflater;
 
-        private ShopItemBrowseAdapter(List<ShopItemVO> teamList) {
+        private ShopItemBrowseAdapter(Context context,List<ShopItemVO> teamList) {
             this.teamList = teamList;
+            this.context = context;
+            inflater = LayoutInflater.from(context);
+            imageSize = getResources().getDisplayMetrics().widthPixels / 4;
         }
 
         //建立ViewHolder，藉由ViewHolder做元件綁定
@@ -115,7 +124,7 @@ public class MyShopItem_Browse extends AppCompatActivity {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_shopitem, parent, false);
+            View view = inflater.inflate(R.layout.card_shopitem, parent, false);
             return new ViewHolder(view);
         }
 
@@ -124,10 +133,10 @@ public class MyShopItem_Browse extends AppCompatActivity {
 
             //將資料注入到View裡
             final ShopItemVO team = teamList.get(position);
-//            holder.ivLogo.setImageResource(team.getLogo());
+            String item_no = team.getS_item_no();
             holder.tvName.setText(team.getS_item_text());
             holder.itemPrice.setText("$ " + String.valueOf(team.getS_item_price()));
-
+shopItemImgTask = new ShopItemImgTask(ServerURL.Shop_URL, item_no, imageSize, holder.ivLogo);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

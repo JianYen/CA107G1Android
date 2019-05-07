@@ -3,6 +3,7 @@ package com.yen.shoppingcar.Shop;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -33,6 +34,9 @@ public class MyShopItem_Detail extends AppCompatActivity {
     ShopItemImgTask shopItemImgTask;
     List<String> shopItemImgVOList;
     private int imageSize = getResources().getDisplayMetrics().widthPixels / 2;
+    String item_no;
+    ShopItemVO shopItemVO;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,9 +48,9 @@ public class MyShopItem_Detail extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        ShopItemVO shopItemVO = (ShopItemVO) intent.getExtras().getSerializable("ShopItemVO");
+         shopItemVO = (ShopItemVO) intent.getExtras().getSerializable("ShopItemVO");
 
-        String item_no = shopItemVO.getS_item_no();
+        item_no = shopItemVO.getS_item_no();
 
 
         try {
@@ -99,8 +103,7 @@ public class MyShopItem_Detail extends AppCompatActivity {
             View itemView = LayoutInflater.from(container.getContext()).inflate(R.layout.card_image, container, false);
 
             // 佈局元件內容
-            ImageView imageView = itemView.findViewById(R.id.imageView1);
-
+            ImageView imageView = itemView.findViewById(R.id.imageForShop);
 
             // 加載
             (container).addView(itemView);
