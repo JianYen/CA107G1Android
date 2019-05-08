@@ -309,10 +309,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     // Fetches data from url passed
     private class DownloadTask extends AsyncTask<String, Void, String> {
-        private String url;
+        private String myURL;
 
         public DownloadTask(String url) {
-            this.url = url;
+            this.myURL = url;
         }
 
         // Downloading data in non-ui thread
@@ -324,7 +324,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             try {
                 // Fetching the data from web service
-                data = downloadUrl(url[0]);
+                data = downloadUrl(myURL);
             } catch (Exception e) {
                 Log.d("Background Task", e.toString());
             }

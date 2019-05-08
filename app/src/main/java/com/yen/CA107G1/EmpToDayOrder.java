@@ -66,7 +66,8 @@ public class EmpToDayOrder extends AppCompatActivity {
 
         try {
             String result = getPickUpTask.execute().get();
-            Type listType = new TypeToken<List<SendBackVO>>() {}.getType();
+            Type listType = new TypeToken<List<SendBackVO>>() {
+            }.getType();
             pickUpList = gson.fromJson(result, listType);
             SPF.edit().putString("hotelOrdList", pickUpList.toString());
             empDayOrder.setAdapter(new DayOrderAdapter(this, pickUpList));
@@ -74,7 +75,7 @@ public class EmpToDayOrder extends AppCompatActivity {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Toast.makeText(this, "今天沒有要送回的訂單^_^", Toast.LENGTH_SHORT).show();
         }
 
@@ -82,16 +83,11 @@ public class EmpToDayOrder extends AppCompatActivity {
     }
 
     public void goMap(View view) {
-        showMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Gson gson = new Gson();
-                String hOrdList = gson.toJson(pickUpList);
-                Intent intent =new Intent(EmpToDayOrder.this, MapsActivity.class);
-                intent.putExtra("hOrdList", hOrdList);
-                startActivity(intent);
-            }
-        });
+        Gson gson = new Gson();
+        String hOrdList = gson.toJson(pickUpList);
+        Intent intent = new Intent(EmpToDayOrder.this, MapsActivity.class);
+        intent.putExtra("hOrdList", hOrdList);
+        startActivity(intent);
     }
 
 
@@ -102,16 +98,16 @@ public class EmpToDayOrder extends AppCompatActivity {
         private Context context;
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            private TextView orderMemName, orderPetName,orderAddress,orderNo;
+            private TextView orderMemName, orderPetName, orderAddress, orderNo;
             private CircleImageView orderPetImage;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
-                orderMemName=itemView.findViewById(R.id.orderMemName);
+                orderMemName = itemView.findViewById(R.id.orderMemName);
                 orderPetName = itemView.findViewById(R.id.orderPetName);
                 orderAddress = itemView.findViewById(R.id.orderAddress);
-                orderNo=itemView.findViewById(R.id.orderNo);
-                orderPetImage=itemView.findViewById(R.id.orderPetImage);
+                orderNo = itemView.findViewById(R.id.orderNo);
+                orderPetImage = itemView.findViewById(R.id.orderPetImage);
             }
         }
 
