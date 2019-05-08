@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/ad3"
     android:layout_height="match_parent"
     tools:context=".MyLogin">
 
@@ -26,6 +27,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+
             android:hint="@string/memID_hint"
             android:inputType="textPersonName"
             android:padding="2dp" />

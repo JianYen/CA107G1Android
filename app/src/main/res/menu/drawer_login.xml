@@ -4,22 +4,26 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_mem"
-            android:icon="@drawable/ic_member"
-            android:title="會員中心" />
+
         <item
             android:id="@+id/nav_news"
             android:icon="@drawable/ic_news"
             android:title="最新消息" />
         <item
-            android:id="@+id/nav_favorite"
+            android:id="@+id/nav_myPet"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="我的收藏" />
+            android:title="我的寵物" />
         <item
             android:id="@+id/nav_order"
             android:icon="@drawable/order_icon"
             android:title="我的住宿訂單" />
+
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/order_icon"
+            android:title="送回訂單" />
+
+
 
         <item
             android:id="@+id/nav_maps"

@@ -10,20 +10,19 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-       <ImageView
-           android:id="@+id/homePageImg"
-           android:layout_width="match_parent"
-           android:layout_marginTop="50dp"
-           android:src="@drawable/logo2"
-           android:layout_height="300dp" />
+        <ImageView
+            android:id="@+id/homePageImg"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="-50dp"
+            android:src="@drawable/logo2" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="16dp"
-            android:layout_weight="1"
             android:columnWidth="120dp" />
     </LinearLayout>
 

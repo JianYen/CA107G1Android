@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yen.shoppingcar">
+    package="com.yen.CA107G1">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -34,8 +34,8 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".PetDetailActivity"></activity>
-        <activity android:name=".EmpToDayOrder" />
+        <activity android:name="com.yen.CA107G1.PetDetailActivity"></activity>
+        <activity android:name="com.yen.CA107G1.EmpToDayOrder" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -52,22 +52,29 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name="com.yen.CA107G1.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".HotelRoom.CredicardPay" />
-        <activity android:name=".HotelRoom.HotelOrderPage" />
-        <activity android:name=".MyLogin" />
+        <activity android:name="com.yen.CA107G1.HotelRoom.CredicardPay" />
+        <activity android:name="com.yen.CA107G1.HotelRoom.HotelOrderPage" />
+        <activity android:name="com.yen.CA107G1.MyLogin" />
         <activity
-            android:name=".HotelRoom.HotelRoomType_Browse"
+            android:name="com.yen.CA107G1.HotelRoom.HotelRoomType_Browse"
             android:label="@string/roomBrowse_title" />
         <activity
-            android:name=".HotelRoom.HotelRroomType_Detail"
+            android:name="com.yen.CA107G1.Member_Order"
+            android:label="我的訂單"
+            android:theme="@style/AppTheme.Dialog"/>
+        <activity
+            android:name="com.yen.CA107G1.HotelRoom.HotelRroomType_Detail"
             android:label="@string/roomDetail_title" />
         <activity
-            android:name=".MyRegister"
+            android:name="com.yen.CA107G1.Activity_myPet"
+            android:label="我的寵物" />
+        <activity
+            android:name="com.yen.CA107G1.MyRegister"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MyMainActivity"
+            android:name="com.yen.CA107G1.MyMainActivity"
             android:label="寵物fun心go"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -76,8 +83,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Shop.MyShopItem_Detail" />
-        <activity android:name=".Shop.MyShopItem_Browse" />
+        <activity android:name="com.yen.CA107G1.Shop.MyShopItem_Detail" />
+        <activity android:name="com.yen.CA107G1.Shop.MyShopItem_Browse" />
     </application>
 
 </manifest>
