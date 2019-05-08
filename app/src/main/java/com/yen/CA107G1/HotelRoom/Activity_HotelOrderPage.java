@@ -27,13 +27,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.yen.CA107G1.R;
-import com.yen.CA107G1.Util;
+import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.HotelOrderVO;
 import com.yen.CA107G1.VO.HotelRoomTypeVO;
 import com.yen.CA107G1.VO.MemberVO;
 import com.yen.CA107G1.VO.PetNameVO;
-import com.yen.CA107G1.myServer.CommonTask;
-import com.yen.CA107G1.myServer.ServerURL;
+import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Server.ServerURL;
 
 import java.lang.reflect.Type;
 import java.text.ParseException;
@@ -43,7 +43,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class HotelOrderPage extends AppCompatActivity {
+public class Activity_HotelOrderPage extends AppCompatActivity {
     private ImageView selectedRoomType;
     private static TextView showCheckin, showCheckout;
     private TextView orderPrice;
@@ -322,14 +322,14 @@ Log.e("我下面有過去嗎？3345678", petNameList.toString());
             sharedPreferences.edit().putString("hoVO", hoVO).apply();
 
             //產生AlertDialog
-            new AlertDialog.Builder(HotelOrderPage.this).setTitle("確認要下訂嗎?")
+            new AlertDialog.Builder(Activity_HotelOrderPage.this).setTitle("確認要下訂嗎?")
 
                     .setMessage("總入住天數為" + totalDay + "天" + "\n" + "總共金額為: " + totalPrice + "元")
                     .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            Intent intent = new Intent(HotelOrderPage.this, CredicardPay.class);
+                            Intent intent = new Intent(Activity_HotelOrderPage.this, Activity_CredicardPay.class);
                             startActivity(intent);
 
                         }

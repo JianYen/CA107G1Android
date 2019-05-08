@@ -1,4 +1,4 @@
-package com.yen.CA107G1;
+package com.yen.CA107G1.Member;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,16 +12,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
+import com.yen.CA107G1.R;
+import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.MemberVO;
-import com.yen.CA107G1.myServer.CallServlet;
-import com.yen.CA107G1.myServer.CommonTask;
-import com.yen.CA107G1.myServer.ServerURL;
+import com.yen.CA107G1.Server.CallServlet;
+import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Server.ServerURL;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 
-public class MyLogin extends AppCompatActivity {
+public class Activity_MemberLogin extends AppCompatActivity {
     private Button btnLogin, btnRegist;
     private EditText tvmemID, tvmemPass;
     private CommonTask isMemberTask;
@@ -129,7 +131,7 @@ public class MyLogin extends AppCompatActivity {
     }
 
     public void btnRegist(View view) {
-        Intent intent = new Intent(MyLogin.this, MyRegister.class);
+        Intent intent = new Intent(Activity_MemberLogin.this, Activity_MemberRegister.class);
         startActivity(intent);
     }
 

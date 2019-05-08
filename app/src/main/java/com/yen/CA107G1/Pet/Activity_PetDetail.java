@@ -1,4 +1,4 @@
-package com.yen.CA107G1;
+package com.yen.CA107G1.Pet;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -27,10 +27,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
+import com.yen.CA107G1.R;
+import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.PetImgVO;
 import com.yen.CA107G1.VO.PetVO;
-import com.yen.CA107G1.myServer.PetLisImageTask;
-import com.yen.CA107G1.myServer.ServerURL;
+import com.yen.CA107G1.Server.PetLisImageTask;
+import com.yen.CA107G1.Server.ServerURL;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -44,7 +46,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PetDetailActivity extends AppCompatActivity {
+public class Activity_PetDetail extends AppCompatActivity {
     private PetVO petVO;
     private PetLisImageTask petImgTask;
     private Bitmap bitmap, picture;
@@ -179,7 +181,7 @@ public class PetDetailActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new ProgressDialog(PetDetailActivity.this);
+            progressDialog = new ProgressDialog(Activity_PetDetail.this);
             progressDialog.setMessage("圖片上傳中...");
             progressDialog.show();
         }

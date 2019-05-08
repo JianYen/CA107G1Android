@@ -1,4 +1,4 @@
-package com.yen.CA107G1.myServer;
+package com.yen.CA107G1.Server;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,9 +17,9 @@ import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ShopItemImgTask extends AsyncTask<Object, Integer, Bitmap> {
+public class PetLisImageTask extends AsyncTask<Object, Integer, Bitmap> {
     private final static String TAG = "RoomTypeImageTask";
-    private String url, shopItemNo;
+    private String url, pet_no;
     private int imageSize;
     /* ImageTask的屬性strong reference到BookListAdapter內的imageView不好，
      * 會導致BookListAdapter進入背景時imageView被參考到而無法被釋放，
@@ -28,13 +28,13 @@ public class ShopItemImgTask extends AsyncTask<Object, Integer, Bitmap> {
      */
     private WeakReference<ImageView> imageViewWeakReference;
 
-    public ShopItemImgTask(String url, String isbn, int imageSize) {
+    public PetLisImageTask(String url, String isbn, int imageSize) {
         this(url, isbn, imageSize, null);
     }
 
-    public ShopItemImgTask(String url, String shopItemNo, int imageSize, ImageView imageView) {
+    public PetLisImageTask(String url, String pet_no, int imageSize, ImageView imageView) {
         this.url = url;
-        this.shopItemNo = shopItemNo;
+        this.pet_no = pet_no;
         this.imageSize = imageSize;
         this.imageViewWeakReference = new WeakReference<>(imageView);
     }
@@ -44,7 +44,7 @@ public class ShopItemImgTask extends AsyncTask<Object, Integer, Bitmap> {
     protected Bitmap doInBackground(Object... objects) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("action", "getImage");
-        jsonObject.addProperty("shopItemNo", shopItemNo);
+        jsonObject.addProperty("pet_no", pet_no);
         jsonObject.addProperty("imageSize", imageSize);
         return getRemoteImage(url, jsonObject.toString());
     }
@@ -58,7 +58,7 @@ public class ShopItemImgTask extends AsyncTask<Object, Integer, Bitmap> {
         if (bitmap != null) {
             imageView.setImageBitmap(bitmap);
         } else {
-            imageView.setImageResource(R.drawable.beauty);
+            imageView.setImageResource(R.drawable.ic_petdefault);
         }
     }
 

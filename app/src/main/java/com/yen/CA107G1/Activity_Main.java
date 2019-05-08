@@ -22,25 +22,30 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.yen.CA107G1.Emp.Activity_EmpToDayOrder;
+import com.yen.CA107G1.Emp.Activity_Maps;
 import com.yen.CA107G1.HotelRoom.Fragment_HotelPage;
-import com.yen.CA107G1.HotelRoom.HotelRoomType_Browse;
-import com.yen.CA107G1.Shop.MyShopItem_Detail;
+import com.yen.CA107G1.HotelRoom.Activity_HotelRoomType_Browse;
+import com.yen.CA107G1.Member.Activity_MemberLogin;
+import com.yen.CA107G1.Member.Activity_Member_Order;
+import com.yen.CA107G1.Pet.Activity_PetList;
+import com.yen.CA107G1.Shop.Activity_MyShopItem_Detail;
+import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.MemberVO;
-import com.yen.CA107G1.myServer.CommonTask;
-import com.yen.CA107G1.myServer.ServerURL;
+import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Server.ServerURL;
 
 import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MyMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
+public class Activity_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
     private CircleImageView circleImageView;
@@ -132,7 +137,7 @@ public class MyMainActivity extends AppCompatActivity implements NavigationView.
 
         switch (navLogin.getText().toString()) {
             case "登入":
-                Intent intent = new Intent(MyMainActivity.this, MyLogin.class);
+                Intent intent = new Intent(Activity_Main.this, Activity_MemberLogin.class);
                 startActivityForResult(intent, LOGIN_REQUEST);
                 break;
 
@@ -216,7 +221,7 @@ public class MyMainActivity extends AppCompatActivity implements NavigationView.
                     return new Fragment_HotelPage();
 
 //                case 2:
-//                    return new Fragment_MyPetList();
+//                    return new Fragment_PetList();
             }
             return null;
         }
@@ -240,28 +245,28 @@ public class MyMainActivity extends AppCompatActivity implements NavigationView.
 
 
             case R.id.nav_news:
-                intent.setClass(MyMainActivity.this, MyShopItem_Detail.class);
+                intent.setClass(Activity_Main.this, Activity_MyShopItem_Detail.class);
                 break;
 
             case R.id.nav_myPet:
-                intent.setClass(MyMainActivity.this, Activity_myPet.class);
+                intent.setClass(Activity_Main.this, Activity_PetList.class);
                 break;
 
 
             case R.id.nav_order:
-                intent.setClass(MyMainActivity.this, Member_Order.class);
+                intent.setClass(Activity_Main.this, Activity_Member_Order.class);
                 break;
 
             case R.id.nav_hotel:
-                intent.setClass(MyMainActivity.this, HotelRoomType_Browse.class);
+                intent.setClass(Activity_Main.this, Activity_HotelRoomType_Browse.class);
                 break;
 
             case R.id.nav_map:
-                intent.setClass(MyMainActivity.this, EmpToDayOrder.class);
+                intent.setClass(Activity_Main.this, Activity_EmpToDayOrder.class);
                 break;
 
             case R.id.nav_maps:
-                intent.setClass(MyMainActivity.this, MapsActivity.class);
+                intent.setClass(Activity_Main.this, Activity_Maps.class);
                 break;
             case R.id.empLogin:
                 break;

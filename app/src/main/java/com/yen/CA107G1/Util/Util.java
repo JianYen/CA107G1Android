@@ -1,4 +1,4 @@
-package com.yen.CA107G1;
+package com.yen.CA107G1.Util;
 
 import android.app.Activity;
 import android.content.Context;

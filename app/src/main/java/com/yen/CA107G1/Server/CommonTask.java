@@ -1,4 +1,4 @@
-package com.yen.CA107G1.myServer;
+package com.yen.CA107G1.Server;
 
 import android.os.AsyncTask;
 import android.util.Log;

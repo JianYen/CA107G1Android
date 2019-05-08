@@ -1,4 +1,4 @@
-package com.yen.CA107G1;
+package com.yen.CA107G1.Emp;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,10 +19,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.yen.CA107G1.R;
+import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.SendBackVO;
-import com.yen.CA107G1.myServer.CommonTask;
-import com.yen.CA107G1.myServer.PetLisImageTask;
-import com.yen.CA107G1.myServer.ServerURL;
+import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Server.PetLisImageTask;
+import com.yen.CA107G1.Server.ServerURL;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -30,7 +32,7 @@ import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class EmpToDayOrder extends AppCompatActivity {
+public class Activity_EmpToDayOrder extends AppCompatActivity {
     private RecyclerView empDayOrder;
     private Button showMap;
     private CommonTask getPickUpTask;
@@ -85,7 +87,7 @@ public class EmpToDayOrder extends AppCompatActivity {
     public void goMap(View view) {
         Gson gson = new Gson();
         String hOrdList = gson.toJson(pickUpList);
-        Intent intent = new Intent(EmpToDayOrder.this, MapsActivity.class);
+        Intent intent = new Intent(Activity_EmpToDayOrder.this, Activity_Maps.class);
         intent.putExtra("hOrdList", hOrdList);
         startActivity(intent);
     }

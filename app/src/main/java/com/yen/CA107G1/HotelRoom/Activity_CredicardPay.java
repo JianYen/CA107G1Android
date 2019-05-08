@@ -11,16 +11,16 @@ import android.widget.EditText;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.yen.CA107G1.MyMainActivity;
+import com.yen.CA107G1.Activity_Main;
 import com.yen.CA107G1.R;
-import com.yen.CA107G1.Util;
+import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.HotelOrderVO;
-import com.yen.CA107G1.myServer.CommonTask;
-import com.yen.CA107G1.myServer.ServerURL;
+import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Server.ServerURL;
 
 import java.util.concurrent.ExecutionException;
 
-public class CredicardPay extends AppCompatActivity {
+public class Activity_CredicardPay extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private HotelOrderVO hotelOrderVO;
     private Button btnConfirm, btnMagic, btnCancel;
@@ -69,22 +69,17 @@ public class CredicardPay extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Intent intent = new Intent(CredicardPay.this, MyMainActivity.class);
+        Intent intent = new Intent(Activity_CredicardPay.this, Activity_Main.class);
         startActivity(intent);
     }
 
 
     public void magic(View view) {
-        btnMagic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 card1.setText("3345");
                 card2.setText("6789");
                 card3.setText("5310");
                 card4.setText("0821");
                 card5.setText("01/24");
                 card6.setText("693");
-            }
-        });
     }
 }

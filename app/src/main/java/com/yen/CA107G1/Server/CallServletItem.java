@@ -1,4 +1,4 @@
-package com.yen.CA107G1.myServer;
+package com.yen.CA107G1.Server;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -6,11 +6,10 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class CallServlet extends AsyncTask<String, Void, String> {
+public class CallServletItem extends AsyncTask<String, Void, String> {
 
 
     private final static String TAG = "MainActivity";
@@ -26,12 +25,8 @@ public class CallServlet extends AsyncTask<String, Void, String> {
             con.setUseCaches(false); // do not use a cached copy
             con.setRequestMethod("POST");
 
-            String data;
-            Log.e(TAG, "input: " + strings[1]);
-            data = strings[1];
-            OutputStream out = con.getOutputStream();
-            out.write(data.getBytes());
-            out.flush();
+
+
 
             int responseCode = con.getResponseCode();
             if (responseCode == 200) {
@@ -55,6 +50,3 @@ public class CallServlet extends AsyncTask<String, Void, String> {
         return inStr.toString();
     }
 }
-
-
-

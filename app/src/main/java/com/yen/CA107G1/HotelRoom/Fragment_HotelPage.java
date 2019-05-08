@@ -23,13 +23,13 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.yen.CA107G1.MyLogin;
+import com.yen.CA107G1.Member.Activity_MemberLogin;
 import com.yen.CA107G1.R;
-import com.yen.CA107G1.Util;
+import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.HotelRoomTypeVO;
-import com.yen.CA107G1.myServer.CommonTask;
-import com.yen.CA107G1.myServer.RoomTypeImageTask;
-import com.yen.CA107G1.myServer.ServerURL;
+import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Server.RoomTypeImageTask;
+import com.yen.CA107G1.Server.ServerURL;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
@@ -171,7 +171,7 @@ public class Fragment_HotelPage extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if (loginSPF.getBoolean("login", false ) == true) {
-                        Intent intent = new Intent(getActivity(), HotelRroomType_Detail.class);
+                        Intent intent = new Intent(getActivity(), Activity_HotelRroomType_Detail.class);
                         intent.putExtra("roomTypeVO", roomTypeVO);
                         startActivity(intent);
                     }else {
@@ -180,7 +180,7 @@ public class Fragment_HotelPage extends Fragment {
                                 .setPositiveButton("GO,現在登入去", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(getActivity(), MyLogin.class);
+                                        Intent intent = new Intent(getActivity(), Activity_MemberLogin.class);
                                         startActivity(intent);
                                     }
                                 })

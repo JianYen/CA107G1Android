@@ -1,4 +1,4 @@
-package com.yen.CA107G1.myServer;
+package com.yen.CA107G1.Server;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,9 +17,9 @@ import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class RoomTypeImageTask extends AsyncTask<Object, Integer, Bitmap> {
+public class ShopItemImgTask extends AsyncTask<Object, Integer, Bitmap> {
     private final static String TAG = "RoomTypeImageTask";
-    private String url, roomTypeNo;
+    private String url, shopItemNo;
     private int imageSize;
     /* ImageTask的屬性strong reference到BookListAdapter內的imageView不好，
      * 會導致BookListAdapter進入背景時imageView被參考到而無法被釋放，
@@ -28,13 +28,13 @@ public class RoomTypeImageTask extends AsyncTask<Object, Integer, Bitmap> {
      */
     private WeakReference<ImageView> imageViewWeakReference;
 
-    public RoomTypeImageTask(String url, String isbn, int imageSize) {
+    public ShopItemImgTask(String url, String isbn, int imageSize) {
         this(url, isbn, imageSize, null);
     }
 
-    public RoomTypeImageTask(String url, String roomTypeNo, int imageSize, ImageView imageView) {
+    public ShopItemImgTask(String url, String shopItemNo, int imageSize, ImageView imageView) {
         this.url = url;
-        this.roomTypeNo = roomTypeNo;
+        this.shopItemNo = shopItemNo;
         this.imageSize = imageSize;
         this.imageViewWeakReference = new WeakReference<>(imageView);
     }
@@ -44,7 +44,7 @@ public class RoomTypeImageTask extends AsyncTask<Object, Integer, Bitmap> {
     protected Bitmap doInBackground(Object... objects) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("action", "getImage");
-        jsonObject.addProperty("roomTypeNo", roomTypeNo);
+        jsonObject.addProperty("shopItemNo", shopItemNo);
         jsonObject.addProperty("imageSize", imageSize);
         return getRemoteImage(url, jsonObject.toString());
     }

@@ -1,4 +1,4 @@
-package com.yen.CA107G1;
+package com.yen.CA107G1.Emp;
 
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
@@ -33,6 +33,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.yen.CA107G1.R;
+import com.yen.CA107G1.Util.DirectionsJSONParser;
 import com.yen.CA107G1.VO.SendBackVO;
 
 import org.json.JSONObject;
@@ -48,7 +50,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks
+public class Activity_Maps extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks
         , GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener, LocationListener {
     private GoogleMap mMap;
     private List<SendBackVO> hotelOrderVOList;
@@ -291,7 +293,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Output format
         String output = "json";
 
-        //API KEY for Mac: AIzaSyD0kfGJnHcRRUMu3pJiHBN1OcbuGClCN3w
+
         // Building the url to the web service
         String url2 = "https://maps.googleapis.com/maps/api/directions/"
                 + output + "?" + parameters + "&key=AIzaSyAnKoOPsLYLvieImStuPZ_A3-onSLPiozQ";

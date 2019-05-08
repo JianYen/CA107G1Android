@@ -1,4 +1,4 @@
-package com.yen.CA107G1;
+package com.yen.CA107G1.Member;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,12 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
-import com.yen.CA107G1.myServer.CommonTask;
-import com.yen.CA107G1.myServer.ServerURL;
+import com.yen.CA107G1.R;
+import com.yen.CA107G1.Util.Util;
+import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Server.ServerURL;
 
 import java.util.concurrent.ExecutionException;
 
-public class MyRegister extends AppCompatActivity {
+public class Activity_MemberRegister extends AppCompatActivity {
     private EditText registUser, registPassword, checkPasswrod,
             registName, registEmail, registPostnum, registAddress, registPhone;
     private TextView registTexView;
@@ -60,7 +62,7 @@ public class MyRegister extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    if (Util.networkConnected(MyRegister.this)) {
+                    if (Util.networkConnected(Activity_MemberRegister.this)) {
                         JsonObject jsonObject = new JsonObject();
                         jsonObject.addProperty("action", "isUserIdExist");
                         jsonObject.addProperty("userId", registUser.getText().toString().trim());
@@ -178,7 +180,7 @@ public class MyRegister extends AppCompatActivity {
 //                            .putString("password", mem_password)
 //                            .apply();
 //                    Toast.makeText(this,"用戶創建成功", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(MyRegister.this, MyMainActivity.class);
+//                    Intent intent = new Intent(Activity_MemberRegister.this, Activity_Main.class);
 //                    startActivity(intent);
 //                } else {
 //                    Toast.makeText(this, "用戶創建失敗", Toast.LENGTH_SHORT).show();

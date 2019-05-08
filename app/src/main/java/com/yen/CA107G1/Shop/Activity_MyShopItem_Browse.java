@@ -20,17 +20,17 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yen.CA107G1.R;
-import com.yen.CA107G1.Util;
+import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.ShopItemVO;
-import com.yen.CA107G1.myServer.CallServletItem;
-import com.yen.CA107G1.myServer.ServerURL;
-import com.yen.CA107G1.myServer.ShopItemImgTask;
+import com.yen.CA107G1.Server.CallServletItem;
+import com.yen.CA107G1.Server.ServerURL;
+import com.yen.CA107G1.Server.ShopItemImgTask;
 
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class MyShopItem_Browse extends AppCompatActivity {
+public class Activity_MyShopItem_Browse extends AppCompatActivity {
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private ImageView sort;
     private ShopItemImgTask shopItemImgTask;
@@ -141,12 +141,12 @@ shopItemImgTask = new ShopItemImgTask(ServerURL.Shop_URL, item_no, imageSize, ho
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(MyShopItem_Browse.this, team.getS_item_text(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Activity_MyShopItem_Browse.this, team.getS_item_text(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("ShopItemVO", team);
                     intent.putExtras(bundle);
-                    intent.setClass(view.getContext(), MyShopItem_Detail.class);
+                    intent.setClass(view.getContext(), Activity_MyShopItem_Detail.class);
                     startActivity(intent);
 
 

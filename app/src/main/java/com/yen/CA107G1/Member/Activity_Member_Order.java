@@ -1,7 +1,6 @@
-package com.yen.CA107G1;
+package com.yen.CA107G1.Member;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,11 +21,13 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.yen.CA107G1.R;
+import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.MemberPetOrderVO;
 import com.yen.CA107G1.VO.MemberVO;
-import com.yen.CA107G1.myServer.CommonTask;
-import com.yen.CA107G1.myServer.PetLisImageTask;
-import com.yen.CA107G1.myServer.ServerURL;
+import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Server.PetLisImageTask;
+import com.yen.CA107G1.Server.ServerURL;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -34,7 +35,7 @@ import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Member_Order extends AppCompatActivity {
+public class Activity_Member_Order extends AppCompatActivity {
     private RecyclerView memberOrder;
     private Button showMap;
     private CommonTask getMemberPetOrderTask;
@@ -88,7 +89,7 @@ public class Member_Order extends AppCompatActivity {
             Type listType = new TypeToken<List<MemberPetOrderVO>>() {}.getType();
             memberPetOrderVOList = gson.fromJson(result, listType);
             SPF.edit().putString("memberPetOrderVOList", memberPetOrderVOList.toString());
-            memberOrder.setAdapter(new Member_Order.MemberOrderAdapter(this,memberPetOrderVOList));
+            memberOrder.setAdapter(new Activity_Member_Order.MemberOrderAdapter(this,memberPetOrderVOList));
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -103,7 +104,7 @@ public class Member_Order extends AppCompatActivity {
 
 
 
-    private class MemberOrderAdapter extends RecyclerView.Adapter<Member_Order.MemberOrderAdapter.ViewHolder> {
+    private class MemberOrderAdapter extends RecyclerView.Adapter<Activity_Member_Order.MemberOrderAdapter.ViewHolder> {
         private List<MemberPetOrderVO> list;
         private LayoutInflater layoutInflater;
         private int imageSize;
@@ -132,13 +133,13 @@ public class Member_Order extends AppCompatActivity {
 
         @NonNull
         @Override
-        public Member_Order.MemberOrderAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public Activity_Member_Order.MemberOrderAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = layoutInflater.from(parent.getContext()).inflate(R.layout.card_empdayorder, parent, false);
-            return new Member_Order.MemberOrderAdapter.ViewHolder(view);
+            return new Activity_Member_Order.MemberOrderAdapter.ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull Member_Order.MemberOrderAdapter.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull Activity_Member_Order.MemberOrderAdapter.ViewHolder holder, int position) {
             final MemberPetOrderVO memberPetOrderVO = list.get(position);
             holder.orderMemName.setText(memberPetOrderVO.getMem_name());
             holder.orderPetName.setText(memberPetOrderVO.getPet_name());

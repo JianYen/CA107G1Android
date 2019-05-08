@@ -19,16 +19,16 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.yen.CA107G1.R;
-import com.yen.CA107G1.Util;
+import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.HotelRoomTypeVO;
-import com.yen.CA107G1.myServer.CommonTask;
-import com.yen.CA107G1.myServer.RoomTypeImageTask;
-import com.yen.CA107G1.myServer.ServerURL;
+import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Server.RoomTypeImageTask;
+import com.yen.CA107G1.Server.ServerURL;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class    HotelRoomType_Browse extends AppCompatActivity {
+public class Activity_HotelRoomType_Browse extends AppCompatActivity {
     private static final String TAG = "HotelRoomType";
     private RecyclerView hotelRoomTypeRcview;
     private CommonTask getRoomTypeTask;
@@ -118,7 +118,7 @@ public class    HotelRoomType_Browse extends AppCompatActivity {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(HotelRoomType_Browse.this, HotelRroomType_Detail.class);
+                    Intent intent = new Intent(Activity_HotelRoomType_Browse.this, Activity_HotelRroomType_Detail.class);
                     intent.putExtra("roomTypeVO", roomTypeVO);
                     startActivity(intent);
                 }

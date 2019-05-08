@@ -13,12 +13,12 @@ import android.widget.Toast;
 
 import com.yen.CA107G1.R;
 import com.yen.CA107G1.VO.HotelRoomTypeVO;
-import com.yen.CA107G1.myServer.RoomTypeImageTask;
-import com.yen.CA107G1.myServer.ServerURL;
+import com.yen.CA107G1.Server.RoomTypeImageTask;
+import com.yen.CA107G1.Server.ServerURL;
 
 import java.io.ByteArrayOutputStream;
 
-public class HotelRroomType_Detail extends AppCompatActivity {
+public class Activity_HotelRroomType_Detail extends AppCompatActivity {
     private RoomTypeImageTask roomTypeImageTask;
     private HotelRoomTypeVO hotelRoomTypeVO;
     private Bitmap bitmap = null;
@@ -80,7 +80,7 @@ public class HotelRroomType_Detail extends AppCompatActivity {
         orderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HotelRroomType_Detail.this, HotelOrderPage.class);
+                Intent intent = new Intent(Activity_HotelRroomType_Detail.this, Activity_HotelOrderPage.class);
                 intent.putExtra("roomTypeVO", hotelRoomTypeVO);
                 intent.putExtra("roomTypeBitmap", buff);
                 startActivity(intent);

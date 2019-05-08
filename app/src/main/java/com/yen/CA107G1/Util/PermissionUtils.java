@@ -1,4 +1,4 @@
-package com.yen.CA107G1;
+package com.yen.CA107G1.Util;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -9,13 +9,15 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import com.yen.CA107G1.Emp.Activity_Maps;
+
 public abstract class PermissionUtils {
 
     /**
      * Requests the fine location permission. If a rationale with an additional explanation should
      * be shown to the user, displays a dialog that triggers the request.
      */
-    public static void requestPermission(MapsActivity activity, int requestId,
+    public static void requestPermission(Activity_Maps activity, int requestId,
                                          String permission, boolean finishActivity) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
             // Display a dialog with rationale.

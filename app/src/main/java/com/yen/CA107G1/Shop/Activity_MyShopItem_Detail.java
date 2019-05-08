@@ -20,15 +20,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.yen.CA107G1.R;
 import com.yen.CA107G1.VO.ShopItemVO;
-import com.yen.CA107G1.myServer.CommonTask;
-import com.yen.CA107G1.myServer.ServerURL;
-import com.yen.CA107G1.myServer.ShopItemImgTask;
+import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Server.ServerURL;
+import com.yen.CA107G1.Server.ShopItemImgTask;
 
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class MyShopItem_Detail extends AppCompatActivity {
+public class Activity_MyShopItem_Detail extends AppCompatActivity {
     ViewPager vpShopItem;
     TextView shopItemTitle, shopItemContent;
     ShopItemImgTask shopItemImgTask;
@@ -68,7 +68,7 @@ public class MyShopItem_Detail extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        vpShopItem.setAdapter(new MyPagerAdapter(MyShopItem_Detail.this, shopItemImgVOList));
+        vpShopItem.setAdapter(new MyPagerAdapter(Activity_MyShopItem_Detail.this, shopItemImgVOList));
 
 
         shopItemTitle.setText(shopItemVO.getS_item_text());

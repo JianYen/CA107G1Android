@@ -1,13 +1,12 @@
-package com.yen.CA107G1;
-
+package com.yen.CA107G1.Pet;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -22,58 +21,41 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.yen.CA107G1.Member.Activity_MemberLogin;
+import com.yen.CA107G1.R;
+import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.MemberVO;
 import com.yen.CA107G1.VO.PetVO;
-import com.yen.CA107G1.myServer.CommonTask;
-import com.yen.CA107G1.myServer.PetLisImageTask;
-import com.yen.CA107G1.myServer.ServerURL;
+import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Server.PetLisImageTask;
+import com.yen.CA107G1.Server.ServerURL;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class Fragment_MyPetList extends Fragment {
+public class Activity_PetList extends AppCompatActivity {
     private CommonTask petListTask;
     private PetLisImageTask petImgTask;
     private RecyclerView petRecyclerview;
     private SharedPreferences loginSPF;
     private MemberVO member;
     AlertDialog alertDialog;
-
+    
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_mypetlist, container, false);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mypetlist);
 
-        petRecyclerview = view.findViewById(R.id.petRecyclerview);
+        petRecyclerview = findViewById(R.id.petRecyclerview);
         petRecyclerview.setHasFixedSize(true);
         petRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-
-        loginSPF = getActivity().getSharedPreferences(Util.PREF_FILE, Context.MODE_PRIVATE);
-
-        return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        petRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        if (loginSPF.getBoolean("login", false)) {
-            try {
-                alertDialog.cancel();
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-            }
-        }
+        loginSPF = getSharedPreferences(Util.PREF_FILE, Context.MODE_PRIVATE);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (Util.networkConnected(getActivity())) {
+        if (Util.networkConnected(this)) {
             //從SharedPreference 取出MemberVO物件 再取出mem_no
             try {
                 Gson gson = new Gson();
@@ -91,14 +73,14 @@ public class Fragment_MyPetList extends Fragment {
                 Log.e("我是PetListAdapter", "我在這");
 
             } catch (NullPointerException ne) {
-                alertDialog = new AlertDialog.Builder(getActivity()).setTitle("貼心提醒!!")
+                alertDialog = new AlertDialog.Builder(this).setTitle("貼心提醒!!")
 
                         .setMessage("登入才能查看更多資訊哦^_^")
                         .setPositiveButton("登入去", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                Intent intent = new Intent(getActivity(), MyLogin.class);
+                                Intent intent = new Intent(Activity_PetList.this, Activity_MemberLogin.class);
                                 startActivity(intent);
                                 dialog.cancel();
 
@@ -112,7 +94,7 @@ public class Fragment_MyPetList extends Fragment {
                         }).show();
             }
         } else {
-            Toast.makeText(getActivity(), "no network connection avaliable", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "no network connection avaliable", Toast.LENGTH_SHORT);
         }
     }
 
@@ -138,18 +120,18 @@ public class Fragment_MyPetList extends Fragment {
             Log.e("TAG", e.toString());
         }
         if (petVOList == null || petVOList.isEmpty()) {
-            Toast.makeText(getActivity(), "petVOList not found", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "petVOList not found", Toast.LENGTH_SHORT);
             Log.e("我是PetListAdapter2", "Adapter沒有被填充");
 
         } else {
-            petRecyclerview.setAdapter(new PetListAdapter(getActivity(), petVOList));
+            petRecyclerview.setAdapter(new Activity_PetList.PetListAdapter(this, petVOList));
             Log.e("i'aaaa", "iaaaaaaaaaaaaaa");
         }
 
     }
 
 
-    private class PetListAdapter extends RecyclerView.Adapter<PetListAdapter.ViewHolder> {
+    private class PetListAdapter extends RecyclerView.Adapter<Activity_PetList.PetListAdapter.ViewHolder> {
         private LayoutInflater layoutInflater;
         private List<PetVO> petList;
         private int imageSize;
@@ -177,13 +159,13 @@ public class Fragment_MyPetList extends Fragment {
 
 
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public Activity_PetList.PetListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = layoutInflater.inflate(R.layout.card_mypet, parent, false);
-            return new ViewHolder(itemView);
+            return new Activity_PetList.PetListAdapter.ViewHolder(itemView);
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(Activity_PetList.PetListAdapter.ViewHolder holder, int position) {
             final PetVO petVOList = petList.get(position);
             String petNo = petVOList.getPet_no();
             petImgTask = new PetLisImageTask(ServerURL.Pet_URL, petNo, imageSize, holder.petImg);
@@ -195,7 +177,7 @@ public class Fragment_MyPetList extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), PetDetailActivity.class);
+                    Intent intent = new Intent(Activity_PetList.this, Activity_PetDetail.class);
                     intent.putExtra("petVOList", petVOList);
                     startActivity(intent);
                 }
@@ -209,6 +191,5 @@ public class Fragment_MyPetList extends Fragment {
             return petList.size();
         }
     }
-
 
 }
