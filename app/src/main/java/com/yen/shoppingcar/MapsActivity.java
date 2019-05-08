@@ -294,6 +294,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Output format
         String output = "json";
 
+        //API KEY for Mac: AIzaSyD0kfGJnHcRRUMu3pJiHBN1OcbuGClCN3w
         // Building the url to the web service
         String url2 = "https://maps.googleapis.com/maps/api/directions/"
                 + output + "?" + parameters+"&key=AIzaSyAQW56GMYrNIjHGWr_gMMA6T8CI-SMkmS8";
