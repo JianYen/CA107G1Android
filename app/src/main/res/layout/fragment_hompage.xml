@@ -17,13 +17,27 @@
             android:layout_marginTop="-50dp"
             android:src="@drawable/logo2" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="25sp"
+            android:text="精選房型"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="16dp"
             android:columnWidth="120dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/newsRc"
+            android:layout_width="match_parent"
+            android:layout_margin="16dp"
+            android:layout_height="250dp"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

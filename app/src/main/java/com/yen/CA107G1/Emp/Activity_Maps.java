@@ -444,10 +444,11 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
 
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
-                lineOptions.width(3);
-
+                lineOptions.width(10);
+                lineOptions.zIndex(1);
+lineOptions.isClickable();
                 // Changing the color polyline according to the mode
-                lineOptions.color(Color.BLUE);
+                lineOptions.color(Color.RED);
             }
 
             // Drawing polyline in the Google Map for the i-th route

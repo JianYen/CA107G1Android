@@ -59,7 +59,6 @@ public class DirectionsJSONParser {
             e.printStackTrace();
         } catch (Exception e) {
         }
-        Log.e("我是吳美慶DirectionsParser",routes.toString());
         return routes;
     }
 

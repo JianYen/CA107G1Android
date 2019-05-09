@@ -99,13 +99,33 @@ PagerSnapHelper snapHelper;
         }
     }
 
-    public class GlideImageLoader extends ImageLoader {
+   private class  NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
 
 
-        public void displayImage(Context context, Object path, ImageView imageView) {
-            Glide.with(context).load((Integer) path).into(imageView);
+       class ViewHolder extends RecyclerView.ViewHolder{
 
-        }
+           private ViewHolder(@NonNull View itemView) {
+               super(itemView);
+           }
+       }
+
+       @NonNull
+       @Override
+       public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+           return null;
+       }
+
+       @Override
+       public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+
+       }
+
+       @Override
+       public int getItemCount() {
+           return 0;
+       }
+
+
 
     }
 
