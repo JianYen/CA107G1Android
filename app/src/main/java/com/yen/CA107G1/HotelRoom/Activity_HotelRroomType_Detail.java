@@ -1,28 +1,39 @@
 package com.yen.CA107G1.HotelRoom;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yen.CA107G1.R;
+import com.yen.CA107G1.VO.HomePageVO;
 import com.yen.CA107G1.VO.HotelRoomTypeVO;
 import com.yen.CA107G1.Server.RoomTypeImageTask;
 import com.yen.CA107G1.Server.ServerURL;
+import com.yen.CA107G1.VO.HotelroomtypemsgVO;
+import com.yen.CA107G1.VO.PetVO;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 public class Activity_HotelRroomType_Detail extends AppCompatActivity {
     private RoomTypeImageTask roomTypeImageTask;
     private HotelRoomTypeVO hotelRoomTypeVO;
     private Bitmap bitmap = null;
     private byte buff[] = null;
+    private RecyclerView hotelMsgRcView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,5 +97,43 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private class HotelMsgAdapter extends RecyclerView.Adapter<Activity_HotelRroomType_Detail.HotelMsgAdapter.ViewHolder>{
+        private LayoutInflater layoutInflater;
+        private List<HotelroomtypemsgVO> msgList;
+        private Context context;
+
+        private HotelMsgAdapter(Context context, List<HotelroomtypemsgVO> msgList) {
+            this.context = context;
+            this.msgList = msgList;
+            layoutInflater = LayoutInflater.from(context);
+
+
+        }
+
+
+        @Override
+        public Activity_HotelRroomType_Detail.HotelMsgAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View itemView = layoutInflater.inflate(R.layout.card_roomtyperating, parent, false);
+            return null;
+        }
+
+        @Override
+        public void onBindViewHolder(Activity_HotelRroomType_Detail.HotelMsgAdapter.ViewHolder viewHolder, int position) {
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return 0;
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder{
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+            }
+        }
     }
 }

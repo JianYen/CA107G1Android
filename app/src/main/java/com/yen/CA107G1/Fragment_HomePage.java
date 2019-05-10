@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yen.CA107G1.VO.HomePageVO;
+import com.yen.CA107G1.VO.NewsVO;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
@@ -25,22 +26,29 @@ import java.util.List;
 
 
 public class Fragment_HomePage extends Fragment {
-   private Banner banner;
-private ImageView homePageImg;
-PagerSnapHelper snapHelper;
+    private Banner banner;
+    private ImageView homePageImg;
+    private PagerSnapHelper snapHelper;
+    private RecyclerView recyclerView, newsRc;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hompage, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        newsRc = view.findViewById(R.id.newsRcView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
+
+        newsRc.setHasFixedSize(true);
+newsRc.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
 
         List<HomePageVO> hpList = new ArrayList<>();
         hpList.add(new HomePageVO(R.drawable.icon_member, "會員資料"));
         hpList.add(new HomePageVO(R.drawable.icon_likes, "我的收藏"));
         hpList.add(new HomePageVO(R.drawable.icon_pet, "寵物資料"));
         hpList.add(new HomePageVO(R.drawable.icon_order, "我的訂單"));
+
 
 
         snapHelper = new PagerSnapHelper();
@@ -53,6 +61,7 @@ PagerSnapHelper snapHelper;
 
     private class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHolder> {
         private List<HomePageVO> hpList;
+        LayoutInflater inflater;
 
         private HomePageAdapter(List<HomePageVO> hpList) {
             this.hpList = hpList;
@@ -99,32 +108,42 @@ PagerSnapHelper snapHelper;
         }
     }
 
-   private class  NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
+    private class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
+        private List<NewsVO> newsList;
+        private LayoutInflater inflater;
+
+        private NewsAdapter(Context context, List<NewsVO> newsList) {
+            this.newsList = newsList;
+            inflater = LayoutInflater.from(context);
+        }
 
 
-       class ViewHolder extends RecyclerView.ViewHolder{
+        class ViewHolder extends RecyclerView.ViewHolder {
+            TextView newsText;
 
-           private ViewHolder(@NonNull View itemView) {
-               super(itemView);
-           }
-       }
+            private ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                newsText = itemView.findViewById(R.id.newsText);
+            }
+        }
 
-       @NonNull
-       @Override
-       public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-           return null;
-       }
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = inflater.inflate(R.layout.card_news, parent, false);
+            return new ViewHolder(view);
+        }
 
-       @Override
-       public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            final NewsVO newsVO = newsList.get(position);
+            holder.newsText.setText(newsVO.getNews_text());
+        }
 
-       }
-
-       @Override
-       public int getItemCount() {
-           return 0;
-       }
-
+        @Override
+        public int getItemCount() {
+            return newsList.size();
+        }
 
 
     }

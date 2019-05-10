@@ -9,27 +9,23 @@
 
     <ImageView
         android:id="@+id/roomTypeDetailImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="3dp"
+        android:layout_width="411dp"
+        android:layout_height="232dp"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/roomTypeDetailTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/roomTypeDetailTitle"
-        android:layout_width="0dp"
+        android:layout_width="402dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/roomTypeDetailPrice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roomTypeDetailImage" />
@@ -38,45 +34,64 @@
         android:id="@+id/roomTypeDetailPrice"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_margin="5dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="22dp"
-        app:layout_constraintBottom_toTopOf="@+id/hotelRoomTypeScroll"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roomTypeDetailTitle" />
 
-    <ScrollView
-        android:id="@+id/hotelRoomTypeScroll"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="191dp"
+
+    <TextView
+        android:id="@+id/roomTypeDetailContent"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roomTypeDetailPrice" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roomTypeDetailPrice">
+        app:layout_constraintTop_toBottomOf="@+id/roomTypeDetailContent">
 
-        <TextView
-            android:id="@+id/roomTypeDetailContent"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/hotelMsgRcView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:textSize="18sp" />
+            android:layout_height="300dp"
+            tools:layout_editor_absoluteX="-83dp"
+            tools:layout_editor_absoluteY="432dp">
 
-    </ScrollView>
+        </android.support.v7.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/orderBtn"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
 
-        android:text="直接下訂"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/orderBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+android:layout_gravity="bottom"
+            android:text="直接下訂"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
+    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

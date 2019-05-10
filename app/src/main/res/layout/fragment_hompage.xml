@@ -34,7 +34,7 @@
             android:columnWidth="120dp" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/newsRc"
+            android:id="@+id/newsRcView"
             android:layout_width="match_parent"
             android:layout_margin="16dp"
             android:layout_height="250dp"/>
