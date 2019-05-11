@@ -24,6 +24,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.yen.CA107G1.R;
 import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.HomePageVO;
 import com.yen.CA107G1.VO.HotelRoomTypeVO;
 import com.yen.CA107G1.Server.RoomTypeImageTask;
@@ -44,47 +45,80 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
     private RecyclerView hotelMsgRcView;
     private HotelroomtypemsgVO hotelroomtypemsgVO;
     private String hotelMsgResult;
-    private List<HotelroomtypemsgVO> roomMsg;
+    private CommonTask getMsgTask;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotelroomtype_detail);
+        hotelMsgRcView = findViewById(R.id.hotelMsgRcView);
 
-        hotelRoomTypeVO = (HotelRoomTypeVO)getIntent().getSerializableExtra("roomTypeVO");
+        hotelRoomTypeVO = (HotelRoomTypeVO) getIntent().getSerializableExtra("roomTypeVO");
         if (hotelRoomTypeVO == null) {
             Toast.makeText(this, "房型詳情無法顯示", Toast.LENGTH_SHORT);
         } else {
             showDetail(hotelRoomTypeVO);
-getRoomMsgTask();
         }
     }
-    public void getRoomMsgTask(){
-Gson gson = new Gson();
-JsonObject jsonObject = new JsonObject();
-jsonObject.addProperty("action", "getMsg");
-jsonObject.addProperty("roomTypeNO", hotelRoomTypeVO.getH_roomtype_no());
-String jsonOut = gson.toJson(jsonObject);
-        try {
-            hotelMsgResult = new CommonTask(ServerURL.HotelRoomTypeMsg_URL, jsonOut).execute().get();
-            Type listType = new TypeToken<HotelroomtypemsgVO>(){}.getType();
-            roomMsg = gson.fromJson(hotelMsgResult, listType);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-hotelMsgRcView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        hotelMsgRcView.setAdapter(new Activity_HotelRroomType_Detail.HotelMsgAdapter(this, roomMsg));
+    @Override
+    public void onResume() {
+        super.onResume();
+        hotelMsgRcView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+
     }
 
-    private byte[] Bitmap2Bytes(Bitmap bm){
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (Util.networkConnected(this)) {
+
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "getMsg");
+            jsonObject.addProperty("roomTypeNo",hotelRoomTypeVO.getH_roomtype_no());
+            String jsonOut = jsonObject.toString();
+            Log.e("我是ROOMTYPE的onStart", jsonOut);
+            updateUI(jsonOut);
+            Log.e("我是ROOMTYPE的onStart", "我在這");
+            Log.e("我是ROOMTYPE的onStart", hotelRoomTypeVO.getH_roomtype_no());
+        } else {
+            Toast.makeText(this, "no network connection avaliable", Toast.LENGTH_SHORT);
+        }
+    }
+
+    public void updateUI(String jsonOut) {
+        getMsgTask = new CommonTask(ServerURL.HotelRoomTypeMsg_URL, jsonOut);
+        List<HotelroomtypemsgVO> msgList = null;
+
+        try {
+            String jsonIn = getMsgTask.execute().get();
+            Type listType = new TypeToken<List<HotelroomtypemsgVO>>() {}.getType();
+            msgList = new Gson().fromJson(jsonIn, listType);
+
+        } catch (Exception e) {
+            Log.e("我是RoomtypeDetail的", e.toString());
+        }
+        if (msgList == null || msgList.isEmpty()) {
+            Toast.makeText(this, "roomTypeList not found", Toast.LENGTH_SHORT);
+            Log.e("RoomDetail的UpDATEUI", "Adapter沒有被填充");
+
+        } else {
+            hotelMsgRcView.setAdapter(new Activity_HotelRroomType_Detail.HotelMsgAdapter(this, msgList));
+            Log.e("ROOMTYPEDETAIL的updateUI", "我是ROOMTYPE的MSG");
+        }
+
+    }
+
+
+
+    private byte[] Bitmap2Bytes(Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         return baos.toByteArray();
     }
 
-    public void showDetail(final HotelRoomTypeVO hotelRoomTypeVO){
+    public void showDetail(final HotelRoomTypeVO hotelRoomTypeVO) {
         ImageView roomTypeDetailImage = findViewById(R.id.roomTypeDetailImage);
-        String rtno =hotelRoomTypeVO.getH_roomtype_no();
+        String rtno = hotelRoomTypeVO.getH_roomtype_no();
         final int imageSize = getResources().getDisplayMetrics().widthPixels / 2;
 
 
@@ -93,7 +127,7 @@ hotelMsgRcView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridL
             bitmap = roomTypeImageTask.execute().get();
 
             //圖片包裝好 然後序列化帶到下個頁面
-            buff =new byte[1024*1024];
+            buff = new byte[1024 * 1024];
             buff = Bitmap2Bytes(bitmap);
 
         } catch (Exception e) {
@@ -104,7 +138,7 @@ hotelMsgRcView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridL
 
             roomTypeDetailImage.setImageBitmap(bitmap);
 
-        }else {
+        } else {
             roomTypeDetailImage.setImageResource(R.drawable.beauty2);
         }
 
@@ -113,7 +147,7 @@ hotelMsgRcView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridL
         TextView roomTypeDetailPrice = findViewById(R.id.roomTypeDetailPrice);
         roomTypeDetailTitle.setText(hotelRoomTypeVO.getH_roomtype_text());
         roomTypeDetailContent.setText(hotelRoomTypeVO.getH_roomtype_desc());
-        roomTypeDetailPrice.setText("$"+hotelRoomTypeVO.getH_roomtype_price());
+        roomTypeDetailPrice.setText("$" + hotelRoomTypeVO.getH_roomtype_price());
 
         Button orderBtn = findViewById(R.id.orderBtn);
         orderBtn.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +161,7 @@ hotelMsgRcView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridL
         });
     }
 
-    private class HotelMsgAdapter extends RecyclerView.Adapter<Activity_HotelRroomType_Detail.HotelMsgAdapter.ViewHolder>{
+    private class HotelMsgAdapter extends RecyclerView.Adapter<Activity_HotelRroomType_Detail.HotelMsgAdapter.ViewHolder> {
         private LayoutInflater layoutInflater;
         private List<HotelroomtypemsgVO> msgList;
         private Context context;
@@ -139,15 +173,16 @@ hotelMsgRcView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridL
 
 
         }
-        class ViewHolder extends RecyclerView.ViewHolder{
+
+        class ViewHolder extends RecyclerView.ViewHolder {
             private RatingBar hotelRating;
             private TextView msgHotelMem_name, hotelMSG;
 
             public ViewHolder(View itemView) {
                 super(itemView);
-hotelRating = itemView.findViewById(R.id.hotelRating);
-msgHotelMem_name = itemView.findViewById(R.id.msgHotelMem_name);
-hotelMSG = itemView.findViewById(R.id.hotelMSG);
+                hotelRating = itemView.findViewById(R.id.hotelRating);
+                msgHotelMem_name = itemView.findViewById(R.id.msgHotelMem_name);
+                hotelMSG = itemView.findViewById(R.id.hotelMSG);
             }
         }
 
@@ -160,9 +195,9 @@ hotelMSG = itemView.findViewById(R.id.hotelMSG);
         @Override
         public void onBindViewHolder(Activity_HotelRroomType_Detail.HotelMsgAdapter.ViewHolder holder, int position) {
             final HotelroomtypemsgVO msgVO = msgList.get(position);
-holder.hotelMSG.setText(msgVO.getH_msg_text());
-holder.msgHotelMem_name.setText(msgVO.getMem_name());
-holder.hotelRating.setRating(msgVO.getH_msg_score());
+            holder.hotelMSG.setText(msgVO.getH_msg_text());
+            holder.msgHotelMem_name.setText(msgVO.getMem_name());
+            holder.hotelRating.setRating(msgVO.getH_msg_score());
         }
 
         @Override
