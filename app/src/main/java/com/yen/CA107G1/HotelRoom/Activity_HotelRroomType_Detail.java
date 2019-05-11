@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +15,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.yen.CA107G1.R;
+import com.yen.CA107G1.Server.CommonTask;
 import com.yen.CA107G1.VO.HomePageVO;
 import com.yen.CA107G1.VO.HotelRoomTypeVO;
 import com.yen.CA107G1.Server.RoomTypeImageTask;
@@ -26,7 +32,9 @@ import com.yen.CA107G1.VO.HotelroomtypemsgVO;
 import com.yen.CA107G1.VO.PetVO;
 
 import java.io.ByteArrayOutputStream;
+import java.lang.reflect.Type;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class Activity_HotelRroomType_Detail extends AppCompatActivity {
     private RoomTypeImageTask roomTypeImageTask;
@@ -34,6 +42,9 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
     private Bitmap bitmap = null;
     private byte buff[] = null;
     private RecyclerView hotelMsgRcView;
+    private HotelroomtypemsgVO hotelroomtypemsgVO;
+    private String hotelMsgResult;
+    private List<HotelroomtypemsgVO> roomMsg;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +56,24 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
             Toast.makeText(this, "房型詳情無法顯示", Toast.LENGTH_SHORT);
         } else {
             showDetail(hotelRoomTypeVO);
+getRoomMsgTask();
         }
+    }
+    public void getRoomMsgTask(){
+Gson gson = new Gson();
+JsonObject jsonObject = new JsonObject();
+jsonObject.addProperty("action", "getMsg");
+jsonObject.addProperty("roomTypeNO", hotelRoomTypeVO.getH_roomtype_no());
+String jsonOut = gson.toJson(jsonObject);
+        try {
+            hotelMsgResult = new CommonTask(ServerURL.HotelRoomTypeMsg_URL, jsonOut).execute().get();
+            Type listType = new TypeToken<HotelroomtypemsgVO>(){}.getType();
+            roomMsg = gson.fromJson(hotelMsgResult, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+hotelMsgRcView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+        hotelMsgRcView.setAdapter(new Activity_HotelRroomType_Detail.HotelMsgAdapter(this, roomMsg));
     }
 
     private byte[] Bitmap2Bytes(Bitmap bm){
@@ -111,29 +139,37 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
 
 
         }
+        class ViewHolder extends RecyclerView.ViewHolder{
+            private RatingBar hotelRating;
+            private TextView msgHotelMem_name, hotelMSG;
 
+            public ViewHolder(View itemView) {
+                super(itemView);
+hotelRating = itemView.findViewById(R.id.hotelRating);
+msgHotelMem_name = itemView.findViewById(R.id.msgHotelMem_name);
+hotelMSG = itemView.findViewById(R.id.hotelMSG);
+            }
+        }
 
         @Override
         public Activity_HotelRroomType_Detail.HotelMsgAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = layoutInflater.inflate(R.layout.card_roomtyperating, parent, false);
-            return null;
+            return new Activity_HotelRroomType_Detail.HotelMsgAdapter.ViewHolder(itemView);
         }
 
         @Override
-        public void onBindViewHolder(Activity_HotelRroomType_Detail.HotelMsgAdapter.ViewHolder viewHolder, int position) {
-
+        public void onBindViewHolder(Activity_HotelRroomType_Detail.HotelMsgAdapter.ViewHolder holder, int position) {
+            final HotelroomtypemsgVO msgVO = msgList.get(position);
+holder.hotelMSG.setText(msgVO.getH_msg_text());
+holder.msgHotelMem_name.setText(msgVO.getMem_name());
+holder.hotelRating.setRating(msgVO.getH_msg_score());
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return msgList.size();
         }
 
-        class ViewHolder extends RecyclerView.ViewHolder{
 
-            public ViewHolder(View itemView) {
-                super(itemView);
-            }
-        }
     }
 }

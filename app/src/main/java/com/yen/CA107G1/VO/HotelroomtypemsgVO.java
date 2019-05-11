@@ -5,8 +5,9 @@ public class HotelroomtypemsgVO implements java.io.Serializable{
     private Integer h_msg_status;
     private String h_roomtype_no;
     private String h_msg_text;
-    private Double h_msg_score;
+    private Float h_msg_score;
     private String h_ord_no;
+    private String mem_name;
 
     public HotelroomtypemsgVO() {
 
@@ -35,10 +36,10 @@ public class HotelroomtypemsgVO implements java.io.Serializable{
     public void setH_msg_text(String h_msg_text) {
         this.h_msg_text = h_msg_text;
     }
-    public Double getH_msg_score() {
+    public Float getH_msg_score() {
         return h_msg_score;
     }
-    public void setH_msg_score(Double h_msg_score) {
+    public void setH_msg_score(Float h_msg_score) {
         this.h_msg_score = h_msg_score;
     }
     public String getH_ord_no() {
@@ -47,4 +48,12 @@ public class HotelroomtypemsgVO implements java.io.Serializable{
     public void setH_ord_no(String h_ord_no) {
         this.h_ord_no = h_ord_no;
     }
+    public String getMem_name() {
+        return mem_name;
+    }
+    public void setMem_name(String mem_name) {
+        this.mem_name = mem_name;
+    }
+
+
 }
