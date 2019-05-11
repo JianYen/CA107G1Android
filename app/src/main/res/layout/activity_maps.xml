@@ -39,7 +39,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:onClick="onLocationNameClick"
-            android:text="開始導航"
+            android:text="顯示地點"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintHorizontal_bias="0.028"

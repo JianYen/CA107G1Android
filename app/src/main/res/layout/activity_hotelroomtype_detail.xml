@@ -7,6 +7,42 @@
     android:orientation="vertical">
 
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roomTypeDetailContent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/hotelMsgRcView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            tools:layout_editor_absoluteX="-83dp"
+            tools:layout_editor_absoluteY="432dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+        <Button
+            android:id="@+id/orderBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:text="直接下訂"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </FrameLayout>
+
     <ImageView
         android:id="@+id/roomTypeDetailImage"
         android:layout_width="411dp"
@@ -58,41 +94,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roomTypeDetailPrice" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roomTypeDetailContent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/hotelMsgRcView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            tools:layout_editor_absoluteX="-83dp"
-            tools:layout_editor_absoluteY="432dp">
-
-        </android.support.v7.widget.RecyclerView>
-
-
-        <Button
-            android:id="@+id/orderBtn"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-android:layout_gravity="bottom"
-            android:text="直接下訂"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

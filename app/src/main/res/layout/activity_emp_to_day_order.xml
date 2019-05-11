@@ -25,7 +25,7 @@
 
     <Button
         android:id="@+id/showMap"
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="60dp"
         android:layout_marginBottom="60dp"
         android:text="開始導航"
