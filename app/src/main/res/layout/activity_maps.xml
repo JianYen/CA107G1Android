@@ -15,13 +15,14 @@
         tools:layout_editor_absoluteX="32dp"
         tools:layout_editor_absoluteY="0dp" />
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
 
         android:background="#FFFFFF"
         android:padding="5dp"
@@ -31,13 +32,11 @@
 
         <Button
             android:id="@+id/btSubmit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_alignParentRight="true"
-            android:layout_margin="4dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
             android:onClick="onLocationNameClick"
             android:text="顯示地點"
             map:layout_constraintBottom_toBottomOf="parent"
@@ -49,14 +48,11 @@
 
         <Button
             android:id="@+id/startDirection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:layout_margin="4dp"
             android:onClick="startDirection"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
             android:text="開始導航"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +60,7 @@
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent"
             map:layout_constraintVertical_bias="0.928" />
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>

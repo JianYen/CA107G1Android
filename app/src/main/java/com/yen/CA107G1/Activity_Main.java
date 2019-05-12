@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.yen.CA107G1.Emp.Activity_EmpLogin;
 import com.yen.CA107G1.Emp.Activity_EmpToDayOrder;
 import com.yen.CA107G1.Emp.Activity_Maps;
 import com.yen.CA107G1.HotelRoom.Fragment_HotelPage;
@@ -269,6 +270,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 intent.setClass(Activity_Main.this, Activity_Maps.class);
                 break;
             case R.id.empLogin:
+                intent.setClass(Activity_Main.this, Activity_EmpLogin.class);
                 break;
 
         }

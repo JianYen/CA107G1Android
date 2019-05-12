@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +17,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import com.yen.CA107G1.HotelRoom.Activity_HotelRroomType_Detail;
+import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Server.ServerURL;
+import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.HomePageVO;
+import com.yen.CA107G1.VO.HotelroomtypemsgVO;
 import com.yen.CA107G1.VO.NewsVO;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +40,7 @@ public class Fragment_HomePage extends Fragment {
     private ImageView homePageImg;
     private PagerSnapHelper snapHelper;
     private RecyclerView recyclerView, newsRc;
+    private  CommonTask getNewsTask;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,6 +68,51 @@ newsRc.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutMan
 
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        newsRc.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (Util.networkConnected(getActivity())) {
+
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "getAll");
+            String jsonOut = jsonObject.toString();
+            updateUI(jsonOut);
+            Log.e("我是ROOMTYPE的onStart", "我在這");
+        } else {
+            Toast.makeText(getActivity(), "no network connection avaliable", Toast.LENGTH_SHORT);
+        }
+    }
+
+    public void updateUI(String jsonOut) {
+        getNewsTask = new CommonTask(ServerURL.News_URL, jsonOut);
+        List<NewsVO> newsList = null;
+
+        try {
+            String jsonIn = getNewsTask.execute().get();
+            Type listType = new TypeToken<List<NewsVO>>() {}.getType();
+            newsList = new Gson().fromJson(jsonIn, listType);
+
+        } catch (Exception e) {
+            Log.e("我是RoomtypeDetail的", e.toString());
+        }
+        if (newsList == null || newsList.isEmpty()) {
+            Toast.makeText(getActivity(), "NewsList not found", Toast.LENGTH_SHORT);
+            Log.e("我是NewsAdapter", "Adapter沒有被填充");
+
+        } else {
+            newsRc.setAdapter(new Fragment_HomePage.NewsAdapter(getActivity(), newsList));
+            Log.e("ROOMTYPEDETAIL的updateUI", "我是ROOMTYPE的MSG");
+        }
+
     }
 
     private class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHolder> {

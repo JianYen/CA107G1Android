@@ -58,6 +58,7 @@
         <activity android:name="com.yen.CA107G1.HotelRoom.Activity_CredicardPay" />
         <activity android:name="com.yen.CA107G1.HotelRoom.Activity_HotelOrderPage" />
         <activity android:name="com.yen.CA107G1.Member.Activity_MemberLogin" />
+        <activity android:name="com.yen.CA107G1.Emp.Activity_EmpLogin"/>
         <activity
             android:name="com.yen.CA107G1.HotelRoom.Activity_HotelRoomType_Browse"
             android:label="@string/roomBrowse_title" />

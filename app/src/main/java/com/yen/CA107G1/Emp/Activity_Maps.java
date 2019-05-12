@@ -59,6 +59,7 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
     private Location mLastLocation;
     private Button startDirection;
     private String url = "";
+    List<LatLng> latLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +152,7 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
     }
 
     public void initOrder() {
-        List<LatLng> latLng = new ArrayList();
+        latLng = new ArrayList();
         try {
 
             for (SendBackVO h : hotelOrderVOList) {
@@ -283,13 +284,21 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
         // Travelling Mode
         String mode = "mode=driving";
 
-        //waypoints,116.32885,40.036675
-        String waypointLatLng = "waypoints=" + wayPoint.get(0).latitude + "," + wayPoint.get(0).longitude;
-
         // Building the parameters to the web service
         String parameters = str_origin + "&" + str_dest + "&" + sensor + "&"
-                + mode + "&" + waypointLatLng;
+                + mode+ "&" + "waypoints=";
 
+        StringBuilder strbud = new StringBuilder();
+        strbud.append(parameters);
+        if(wayPoint != null){
+            String waypointLatLng = wayPoint.get(0).latitude + "," + wayPoint.get(0).longitude;
+            strbud.append(waypointLatLng);
+            for(int i=1;i<wayPoint.size();i++){
+                waypointLatLng = wayPoint.get(i).latitude + "," + wayPoint.get(i).longitude;
+                strbud.append("|").append(waypointLatLng);
+            }
+        }
+        parameters=strbud.toString();
         // Output format
         String output = "json";
 
@@ -301,7 +310,6 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
         url = url2;
 //        return url;
     }
-
 
 
     public void startDirection(View view) {
@@ -330,7 +338,7 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
             } catch (Exception e) {
                 Log.d("Background Task", e.toString());
             }
-            Log.e("我是林威志DownloadTask", data+"33456783345678");
+            Log.e("我是林威志DownloadTask", data + "33456783345678");
             return data;
         }
 
@@ -384,7 +392,7 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
             urlConnection.disconnect();
         }
         System.out.println("url:" + strUrl + "---->   downloadurl:" + data);
-        Log.e("我是MAPs裡又見", data.toString()+"9999999999999999999999");
+        Log.e("我是MAPs裡又見", data.toString() + "9999999999999999999999");
         return data;
 
     }
@@ -407,10 +415,10 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
                 // Starts parsing data
                 routes = parser.parse(jObject);
                 System.out.println("do in background:" + routes);
-                Log.e("我是陳鶴麟ParserTask",routes.toString());
+                Log.e("我是陳鶴麟ParserTask", routes.toString());
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.e("我是陳鶴麟ParserTask空的",e.toString());
+                Log.e("我是陳鶴麟ParserTask空的", e.toString());
             }
 
             return routes;
@@ -425,7 +433,7 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
 
             // Traversing through all the routes
             for (int i = 0; i < result.size(); i++) {
-                points = new ArrayList <LatLng>();
+                points = new ArrayList<LatLng>();
                 lineOptions = new PolylineOptions();
 
                 // Fetching i-th route
@@ -446,7 +454,7 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
                 lineOptions.addAll(points);
                 lineOptions.width(10);
                 lineOptions.zIndex(1);
-lineOptions.isClickable();
+                lineOptions.isClickable();
                 // Changing the color polyline according to the mode
                 lineOptions.color(Color.RED);
             }
