@@ -60,12 +60,12 @@ public class Activity_Member_Order extends AppCompatActivity {
         memberOrder.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(memberOrder);
-        Window win = getWindow();
-        WindowManager.LayoutParams lp = win.getAttributes();
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.dimAmount = 0.5f;
-        win.setAttributes(lp);
+//        Window win = getWindow();
+//        WindowManager.LayoutParams lp = win.getAttributes();
+//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+//        lp.dimAmount = 0.5f;
+//        win.setAttributes(lp);
     }
 
 

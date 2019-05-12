@@ -12,9 +12,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-
-
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -23,6 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Emp.Activity_EmpHomePage"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -34,8 +33,9 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name="com.yen.CA107G1.Pet.Activity_PetDetail"></activity>
-        <activity android:name="com.yen.CA107G1.Emp.Activity_EmpToDayOrder" />
+        <activity android:name=".Pet.Activity_PetDetail" />
+        <activity android:name=".Emp.Activity_EmpToDayOrder"
+            android:theme="@style/AppTheme.Dialog"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -49,34 +49,32 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDIVhHS8YyjIjtiVbR3tKkC05DakE3pfUk" />
-        <!--Mac Key = AIzaSyDIVhHS8YyjIjtiVbR3tKkC05DakE3pfUk-->
-
+            android:value="@string/google_maps_key" /> <!-- Mac Key = AIzaSyDIVhHS8YyjIjtiVbR3tKkC05DakE3pfUk -->
         <activity
-            android:name="com.yen.CA107G1.Emp.Activity_Maps"
+            android:name=".Emp.Activity_Maps"
             android:label="@string/title_activity_maps" />
-        <activity android:name="com.yen.CA107G1.HotelRoom.Activity_CredicardPay" />
-        <activity android:name="com.yen.CA107G1.HotelRoom.Activity_HotelOrderPage" />
-        <activity android:name="com.yen.CA107G1.Member.Activity_MemberLogin" />
-        <activity android:name="com.yen.CA107G1.Emp.Activity_EmpLogin"/>
+        <activity android:name=".HotelRoom.Activity_CredicardPay" />
+        <activity android:name=".HotelRoom.Activity_HotelOrderPage" />
+        <activity android:name=".Member.Activity_MemberLogin" />
+        <activity android:name=".Emp.Activity_EmpLogin" />
         <activity
-            android:name="com.yen.CA107G1.HotelRoom.Activity_HotelRoomType_Browse"
+            android:name=".HotelRoom.Activity_HotelRoomType_Browse"
             android:label="@string/roomBrowse_title" />
         <activity
-            android:name="com.yen.CA107G1.Member.Activity_Member_Order"
+            android:name=".Member.Activity_Member_Order"
             android:label="我的訂單"
-            android:theme="@style/AppTheme.Dialog"/>
+            android:theme="@style/AppTheme.Dialog" />
         <activity
-            android:name="com.yen.CA107G1.HotelRoom.Activity_HotelRroomType_Detail"
+            android:name=".HotelRoom.Activity_HotelRroomType_Detail"
             android:label="@string/roomDetail_title" />
         <activity
-            android:name="com.yen.CA107G1.Pet.Activity_PetList"
+            android:name=".Pet.Activity_PetList"
             android:label="我的寵物" />
         <activity
-            android:name="com.yen.CA107G1.Member.Activity_MemberRegister"
+            android:name=".Member.Activity_MemberRegister"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.yen.CA107G1.Activity_Main"
+            android:name=".Activity_Main"
             android:label="寵物fun心go"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -85,8 +83,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.yen.CA107G1.Shop.Activity_MyShopItem_Detail" />
-        <activity android:name="com.yen.CA107G1.Shop.Activity_MyShopItem_Browse" />
+        <activity android:name=".Shop.Activity_MyShopItem_Detail" />
+        <activity android:name=".Shop.Activity_MyShopItem_Browse" />
     </application>
 
 </manifest>

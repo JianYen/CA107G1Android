@@ -70,6 +70,8 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
+
         String ord = getIntent().getStringExtra("hOrdList");
         Log.e("我EXTRA有東西嗎?", ord.toString());
         Gson gson = new Gson();

@@ -58,6 +58,12 @@ public class Activity_EmpToDayOrder extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        empDayOrder.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+    }
+
     public void onStart() {
         super.onStart();
 
@@ -80,16 +86,27 @@ public class Activity_EmpToDayOrder extends AppCompatActivity {
         } catch (NullPointerException e) {
             Toast.makeText(this, "今天沒有要送回的訂單^_^", Toast.LENGTH_SHORT).show();
         }
+if(pickUpList.size()!=0){
+    Toast.makeText(this, "今天總共有"+pickUpList.size()+"筆要送回的訂單呦^_^", Toast.LENGTH_SHORT).show();
+}else {
+    Toast.makeText(this, "今天沒有要送回的訂單^_^", Toast.LENGTH_LONG).show();
+    Log.e("PickupList是空集合", pickUpList.toString());
+}
 
-        Log.e("I am pickUpList", pickUpList.toString());
     }
 
     public void goMap(View view) {
-        Gson gson = new Gson();
-        String hOrdList = gson.toJson(pickUpList);
-        Intent intent = new Intent(Activity_EmpToDayOrder.this, Activity_Maps.class);
-        intent.putExtra("hOrdList", hOrdList);
-        startActivity(intent);
+
+        try {
+            Gson gson = new Gson();
+            String hOrdList = gson.toJson(pickUpList);
+            Intent intent = new Intent(Activity_EmpToDayOrder.this, Activity_Maps.class);
+            Log.e("我是Today", hOrdList);
+            intent.putExtra("hOrdList", hOrdList);
+            startActivity(intent);
+        }catch (NullPointerException e){
+            Toast.makeText(this, "今天沒有要送回的訂單^_^", Toast.LENGTH_SHORT).show();
+        }
     }
 
 

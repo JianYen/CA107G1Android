@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/ad3"
     android:layout_height="match_parent"
-    tools:context=".Member.Activity_MemberLogin">
+    tools:context=".Emp.Activity_EmpLogin">
 
     <TextView
         android:layout_width="match_parent"
@@ -79,7 +79,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnEmpLogin"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginStart="248dp"
@@ -87,8 +87,9 @@
         android:layout_marginTop="448dp"
         android:layout_marginEnd="84dp"
         android:layout_marginRight="84dp"
-        android:onClick="onLoginClick"
+        android:onClick="onEmpLogin"
         android:text="登入"
+
         app:layout_constraintEnd_toEndOf="@+id/tilMemPsw"
         app:layout_constraintHorizontal_bias="0.991"
         app:layout_constraintStart_toStartOf="parent"

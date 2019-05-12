@@ -10,6 +10,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:src="@drawable/ic_petdefault"
         android:layout_margin="8dp"/>
 
     <android.support.v7.widget.RecyclerView

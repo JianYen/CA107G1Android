@@ -262,13 +262,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 intent.setClass(Activity_Main.this, Activity_HotelRoomType_Browse.class);
                 break;
 
-            case R.id.nav_map:
-                intent.setClass(Activity_Main.this, Activity_EmpToDayOrder.class);
-                break;
 
-            case R.id.nav_maps:
-                intent.setClass(Activity_Main.this, Activity_Maps.class);
-                break;
             case R.id.empLogin:
                 intent.setClass(Activity_Main.this, Activity_EmpLogin.class);
                 break;
