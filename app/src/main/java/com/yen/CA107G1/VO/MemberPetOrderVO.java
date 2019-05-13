@@ -9,18 +9,20 @@ public class MemberPetOrderVO implements Serializable {
     private String pet_name;
     private String h_ord_address;
     private String pet_no;
+    private Integer h_ord_status_no;
 
     public MemberPetOrderVO() {
         super();
     }
 
-    public MemberPetOrderVO(String h_ord_no, String mem_name, String pet_name, String h_ord_address, String pet_no) {
+    public MemberPetOrderVO(String h_ord_no, String mem_name, String pet_name, String h_ord_address, String pet_no, Integer h_ord_status_no) {
         super();
         this.h_ord_no = h_ord_no;
         this.mem_name = mem_name;
         this.pet_name = pet_name;
         this.h_ord_address = h_ord_address;
         this.pet_no = pet_no;
+        this.h_ord_status_no = h_ord_status_no;
     }
 
     public String getH_ord_no() {
@@ -62,4 +64,13 @@ public class MemberPetOrderVO implements Serializable {
     public void setPet_no(String pet_no) {
         this.pet_no = pet_no;
     }
+
+    public Integer getH_ord_status_no() {
+        return h_ord_status_no;
+    }
+
+    public void setH_ord_status_no(Integer h_ord_status_no) {
+        this.h_ord_status_no = h_ord_status_no;
+    }
+
 }
