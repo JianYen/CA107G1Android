@@ -12,11 +12,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.yen.CA107G1.R;
+import com.yen.CA107G1.Server.CommonTask;
+import com.yen.CA107G1.Server.ServerURL;
+
+import java.util.concurrent.ExecutionException;
 
 public class Activity_EmpHomePage extends AppCompatActivity {
     private ImageView empQrCodeScan, empCheckSendBack;
-
     private static final String PACKAGE = "com.google.zxing.client.android";
 
     @Override
@@ -88,6 +93,18 @@ public class Activity_EmpHomePage extends AppCompatActivity {
                 message = "Scan was Cancelled!";
             }
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "checkIN");
+            jsonObject.addProperty("h_ord_no", message);
+
+            try {
+                new CommonTask(ServerURL.HotelOrder_URL, jsonObject.toString()).execute().get();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

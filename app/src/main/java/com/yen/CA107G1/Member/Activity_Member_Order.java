@@ -159,7 +159,7 @@ public class Activity_Member_Order extends AppCompatActivity {
                 public void onClick(View v) {
                     int smallerDimension = getDimension();
                     Gson gson = new Gson();
-                    QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(gson.toJson(memberPetOrderVO), null, Contents.Type.TEXT
+                    QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(memberPetOrderVO.getH_ord_no(), null, Contents.Type.TEXT
                             , BarcodeFormat.QR_CODE.toString(), smallerDimension);
 
                     try {

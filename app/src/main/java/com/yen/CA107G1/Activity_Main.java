@@ -178,7 +178,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
             navName.setText("尚未登入");
             navigationView.getMenu().clear();
             navigationView.inflateMenu(R.menu.drawer_notlogin);
-            circleImageView.setImageResource(R.drawable.beauty);
+            circleImageView.setImageResource(R.drawable.ic_member);
             navLogin.setText("登入");
         }
     }

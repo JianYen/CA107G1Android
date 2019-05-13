@@ -14,8 +14,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -69,7 +71,6 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
 
         String ord = getIntent().getStringExtra("hOrdList");
@@ -151,6 +152,8 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 12));
             }
         }
+
+mMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
     }
 
     public void initOrder() {
@@ -203,13 +206,13 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
             // 將地址取出當作標記的描述文字
             String snippet = address.getAddressLine(0);
 
-            String code = address.getPostalCode();
+//            String code = address.getPostalCode();
 
 
             // 將地名或地址轉成位置後在地圖打上對應標記
             mMap.addMarker(new MarkerOptions()
                     .position(latLng)
-                    .title(code + locationName)
+                    .title(locationName)
                     .snippet(snippet));
 
             // 將鏡頭焦點設定在使用者輸入的地點上
@@ -288,19 +291,19 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
 
         // Building the parameters to the web service
         String parameters = str_origin + "&" + str_dest + "&" + sensor + "&"
-                + mode+ "&" + "waypoints=";
+                + mode + "&" + "waypoints=";
 
         StringBuilder strbud = new StringBuilder();
         strbud.append(parameters);
-        if(wayPoint != null){
+        if (wayPoint != null) {
             String waypointLatLng = wayPoint.get(0).latitude + "," + wayPoint.get(0).longitude;
             strbud.append(waypointLatLng);
-            for(int i=1;i<wayPoint.size();i++){
+            for (int i = 1; i < wayPoint.size(); i++) {
                 waypointLatLng = wayPoint.get(i).latitude + "," + wayPoint.get(i).longitude;
                 strbud.append("|").append(waypointLatLng);
             }
         }
-        parameters=strbud.toString();
+        parameters = strbud.toString();
         // Output format
         String output = "json";
 
@@ -467,4 +470,37 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
 
 
     }
+
+    private class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+
+        private  View infoWindow;
+
+        private MyInfoWindowAdapter() {
+            infoWindow = LayoutInflater.from(Activity_Maps.this)
+                    .inflate(R.layout.custom_infowindow, null);
+        }
+
+
+        @Override
+        public View getInfoWindow(Marker marker) {
+            String title = marker.getTitle();
+            TextView tvTitle = infoWindow.findViewById(R.id.customTitle);
+            tvTitle.setText(title);
+
+            String snippet = marker.getSnippet();
+            TextView tvSnippet = infoWindow.findViewById(R.id.customSnippet);
+            tvSnippet.setText(snippet);
+
+            return infoWindow;
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+            return null;
+        }
+    }
+
+
+
+
 }
