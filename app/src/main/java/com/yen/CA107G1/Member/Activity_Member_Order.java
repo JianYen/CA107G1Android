@@ -149,6 +149,13 @@ public class Activity_Member_Order extends AppCompatActivity {
             holder.orderPetName.setText(memberPetOrderVO.getPet_name());
             holder.orderAddress.setText(memberPetOrderVO.getH_ord_address());
             holder.orderNo.setText(memberPetOrderVO.getH_ord_no());
+
+            if(memberPetOrderVO.getH_ord_status_no()!=1){
+            holder.orderMemStatus.setText("未Check IN");
+            }else {
+                holder.orderMemStatus.setText("已Check IN");
+            }
+
             String petNo = memberPetOrderVO.getPet_no();
             petImgTask = new PetLisImageTask(ServerURL.Pet_URL, petNo, imageSize, holder.orderPetImage);
             petImgTask.execute();

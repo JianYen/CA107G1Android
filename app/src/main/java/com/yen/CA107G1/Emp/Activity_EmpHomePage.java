@@ -22,6 +22,9 @@ import java.util.concurrent.ExecutionException;
 
 public class Activity_EmpHomePage extends AppCompatActivity {
     private ImageView empQrCodeScan, empCheckSendBack;
+    private CommonTask checkINTask;
+    private String result;
+    private Boolean isCheckIN = false;
     private static final String PACKAGE = "com.google.zxing.client.android";
 
     @Override
@@ -83,27 +86,44 @@ public class Activity_EmpHomePage extends AppCompatActivity {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
         if (requestCode == 0) {
+            String contents =null;
             String message = "";
             if (resultCode == RESULT_OK) {
-                String contents = intent.getStringExtra("SCAN_RESULT");
+                contents = intent.getStringExtra("SCAN_RESULT");
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
                 message = "Content: " + contents + "\nFormat: " + format;
             } else if (resultCode == RESULT_CANCELED) {
                 message = "Scan was Cancelled!";
             }
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
 
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "checkIN");
-            jsonObject.addProperty("h_ord_no", message);
+            jsonObject.addProperty("h_ord_no", contents);
 
             try {
-                new CommonTask(ServerURL.HotelOrder_URL, jsonObject.toString()).execute().get();
+                checkINTask = new CommonTask(ServerURL.HotelOrder_URL, jsonObject.toString());
+                result = checkINTask.execute().get();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+            isCheckIN = Boolean.valueOf(result);
+
+            if (isCheckIN) {
+                new AlertDialog.Builder(Activity_EmpHomePage.this)
+                        .setTitle("系統提示")
+                        .setMessage("成功CheckIn囉!")
+                        .setIcon(R.drawable.ic_check).show();
+            }else {
+                new AlertDialog.Builder(Activity_EmpHomePage.this)
+                        .setTitle("系統提示")
+                        .setMessage("Oooooops!,發生錯誤囉,請重新掃描")
+                        .setIcon(R.drawable.ic_error).show();
             }
         }
     }
