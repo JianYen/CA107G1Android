@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.hannesdorfmann.swipeback.Position;
+import com.hannesdorfmann.swipeback.SwipeBack;
 import com.yen.CA107G1.R;
 import com.yen.CA107G1.Server.CommonTask;
 import com.yen.CA107G1.Util.Util;
@@ -59,6 +61,11 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
         } else {
             showDetail(hotelRoomTypeVO);
         }
+
+        SwipeBack.attach(this, Position.LEFT)
+//                .setContentView(R.layout.activity_hotelroomtype_detail)
+                .setSwipeBackView(R.layout.swipeback_default);
+
     }
     @Override
     public void onResume() {
@@ -147,7 +154,7 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
         TextView roomTypeDetailPrice = findViewById(R.id.roomTypeDetailPrice);
         roomTypeDetailTitle.setText(hotelRoomTypeVO.getH_roomtype_text());
         roomTypeDetailContent.setText(hotelRoomTypeVO.getH_roomtype_desc());
-        roomTypeDetailPrice.setText("$" + hotelRoomTypeVO.getH_roomtype_price());
+        roomTypeDetailPrice.setText("\uD83D\uDCB2" + hotelRoomTypeVO.getH_roomtype_price());
 
         Button orderBtn = findViewById(R.id.orderBtn);
         orderBtn.setOnClickListener(new View.OnClickListener() {
@@ -206,5 +213,11 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.swipeback_stack_to_front, R.anim.swipeback_slide_right_out);
     }
 }

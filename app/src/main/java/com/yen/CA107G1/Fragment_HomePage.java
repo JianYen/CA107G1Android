@@ -193,7 +193,7 @@ newsRc.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutMan
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             final NewsVO newsVO = newsList.get(position);
-            holder.newsText.setText(newsVO.getNews_text());
+            holder.newsText.setText("\uD83D\uDE38"+newsVO.getNews_text());
         }
 
         @Override

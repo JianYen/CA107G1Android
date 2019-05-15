@@ -53,6 +53,12 @@ public class Activity_PetList extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        petRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         if (Util.networkConnected(this)) {

@@ -131,21 +131,17 @@
 
     <EditText
         android:id="@+id/sendAddress"
-        android:layout_width="393dp"
+        android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginRight="16dp"
         android:hint="需要送回請填地址"
-        app:layout_constraintBottom_toTopOf="@+id/insertRoomOrder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/showCheckout"
-        app:layout_constraintVertical_bias="0.978" />
+        app:layout_constraintTop_toBottomOf="@+id/sendBackCheck" />
 
     <Button
         android:id="@+id/insertRoomOrder"
@@ -167,17 +163,14 @@
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="416dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:text="需要送回嗎 ？"
-        app:layout_constraintBottom_toTopOf="@+id/sendAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkoutPicker"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/selectedRoomType" />
 
 
 </android.support.constraint.ConstraintLayout>

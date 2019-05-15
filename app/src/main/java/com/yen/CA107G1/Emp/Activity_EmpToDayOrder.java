@@ -36,6 +36,7 @@ public class Activity_EmpToDayOrder extends AppCompatActivity {
     private RecyclerView empDayOrder;
     private Button showMap;
     private CommonTask getPickUpTask;
+    private TextView sendBackTitile;
     List<SendBackVO> pickUpList = null;
     private SharedPreferences SPF;
     private PetLisImageTask petImgTask;
@@ -53,6 +54,7 @@ public class Activity_EmpToDayOrder extends AppCompatActivity {
 
     public void findViews() {
         empDayOrder = findViewById(R.id.empDayOrderRecyclerView);
+        sendBackTitile = findViewById(R.id.sendBackTitile);
         empDayOrder.setHasFixedSize(true);
         showMap = findViewById(R.id.showMap);
 
@@ -86,12 +88,13 @@ public class Activity_EmpToDayOrder extends AppCompatActivity {
         } catch (NullPointerException e) {
             Toast.makeText(this, "今天沒有要送回的訂單^_^", Toast.LENGTH_SHORT).show();
         }
-if(pickUpList.size()!=0){
-    Toast.makeText(this, "今天總共有"+pickUpList.size()+"筆要送回的訂單呦^_^", Toast.LENGTH_SHORT).show();
-}else {
-    Toast.makeText(this, "今天沒有要送回的訂單^_^", Toast.LENGTH_LONG).show();
-    Log.e("PickupList是空集合", pickUpList.toString());
-}
+        if (pickUpList.size() != 0) {
+            sendBackTitile.setText("今天總共有" + pickUpList.size() + "筆要送回");
+            Toast.makeText(this, "今天總共有" + pickUpList.size() + "筆要送回的訂單呦^_^", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "今天沒有要送回的訂單^_^", Toast.LENGTH_LONG).show();
+            Log.e("PickupList是空集合", pickUpList.toString());
+        }
 
     }
 
@@ -104,7 +107,7 @@ if(pickUpList.size()!=0){
             Log.e("我是Today", hOrdList);
             intent.putExtra("hOrdList", hOrdList);
             startActivity(intent);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Toast.makeText(this, "今天沒有要送回的訂單^_^", Toast.LENGTH_SHORT).show();
         }
     }

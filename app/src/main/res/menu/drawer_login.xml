@@ -8,7 +8,7 @@
         <item
             android:id="@+id/nav_news"
             android:icon="@drawable/ic_news"
-            android:title="最新消息" />
+            android:title="關於我們" />
         <item
             android:id="@+id/nav_myPet"
             android:icon="@drawable/ic_menu_slideshow"

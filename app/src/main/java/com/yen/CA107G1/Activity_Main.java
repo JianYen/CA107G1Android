@@ -305,7 +305,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
 //            String member = gson.toJson((memberVO));
             loginSharePreference.edit().putString("member", result).apply();
-            Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
 //            Type list = new TypeToken<List<MemberVO>>(){}.getType();
 //            member = gson.fromJson(jsonIn, list);
 //            Log.e("IMMMMMMMMMMMMMMMMMMMM", memberVO.getMem_no());

@@ -79,6 +79,12 @@ public class Activity_Member_Order extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        memberOrder.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+    }
+
     public void onStart() {
         super.onStart();
 
