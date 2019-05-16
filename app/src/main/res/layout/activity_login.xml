@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/ad3"
     android:layout_height="match_parent"
     tools:context=".Member.Activity_MemberLogin">
 
@@ -83,6 +82,7 @@
         android:layout_marginTop="3dp"
         android:onClick="btnRegist"
         android:text="註冊"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/tilMemPsw"
         app:layout_constraintTop_toBottomOf="@+id/tilMemPsw" />
 

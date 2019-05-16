@@ -40,7 +40,7 @@ public class Activity_PetList extends AppCompatActivity {
     private SharedPreferences loginSPF;
     private MemberVO member;
     AlertDialog alertDialog;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,25 +79,7 @@ public class Activity_PetList extends AppCompatActivity {
                 Log.e("我是PetListAdapter", "我在這");
 
             } catch (NullPointerException ne) {
-                alertDialog = new AlertDialog.Builder(this).setTitle("貼心提醒!!")
-
-                        .setMessage("登入才能查看更多資訊哦^_^")
-                        .setPositiveButton("登入去", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                Intent intent = new Intent(Activity_PetList.this, Activity_MemberLogin.class);
-                                startActivity(intent);
-                                dialog.cancel();
-
-                            }
-                        })
-                        .setNegativeButton("等會再去", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        }).show();
+                Toast.makeText(this, "目前還沒有新增寵物唷!", Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(this, "no network connection avaliable", Toast.LENGTH_SHORT);
@@ -174,21 +156,23 @@ public class Activity_PetList extends AppCompatActivity {
         public void onBindViewHolder(Activity_PetList.PetListAdapter.ViewHolder holder, int position) {
             final PetVO petVOList = petList.get(position);
             String petNo = petVOList.getPet_no();
-            petImgTask = new PetLisImageTask(ServerURL.Pet_URL, petNo, imageSize, holder.petImg);
-            petImgTask.execute();
-
-            holder.petName.setText(petVOList.getPet_name());
-            holder.petBreed.setText(petVOList.getPet_breed());
-            holder.petBirth.setText(petVOList.getPet_birth().toString());
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Activity_PetList.this, Activity_PetDetail.class);
-                    intent.putExtra("petVOList", petVOList);
-                    startActivity(intent);
-                }
-            });
-
+            try {
+                petImgTask = new PetLisImageTask(ServerURL.Pet_URL, petNo, imageSize, holder.petImg);
+                petImgTask.execute();
+                holder.petName.setText(petVOList.getPet_name());
+                holder.petBreed.setText(petVOList.getPet_breed());
+                holder.petBirth.setText(petVOList.getPet_birth().toString());
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Activity_PetList.this, Activity_PetDetail.class);
+                        intent.putExtra("petVOList", petVOList);
+                        startActivity(intent);
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }
 

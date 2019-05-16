@@ -2,15 +2,23 @@ package com.yen.CA107G1.Member;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.engine.Resource;
 import com.google.gson.JsonObject;
 import com.yen.CA107G1.R;
 import com.yen.CA107G1.Util.Util;
@@ -19,6 +27,7 @@ import com.yen.CA107G1.Server.CallServlet;
 import com.yen.CA107G1.Server.CommonTask;
 import com.yen.CA107G1.Server.ServerURL;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -31,6 +40,7 @@ public class Activity_MemberLogin extends AppCompatActivity {
     JsonObject jsonObject;
     String user, password;
     TextInputLayout tilMemId, tilMemPsw;
+    private ConstraintLayout loginConstraint ;
 
 
     @Override

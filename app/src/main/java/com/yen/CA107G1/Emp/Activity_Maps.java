@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.engine.Resource;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationAvailability;
@@ -189,7 +190,7 @@ mMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
 //            geocoder.getFromLocation()
 
             // 如果無法連結到提供服務的伺服器，會拋出IOException
-        } catch (IOException ie) {
+        } catch (Exception ie) {
             Log.e("我是MapsActivity的ＴＡＧ", ie.toString());
         }
 
@@ -458,10 +459,10 @@ mMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
                 lineOptions.width(10);
-                lineOptions.zIndex(1);
+                lineOptions.zIndex(2);
                 lineOptions.isClickable();
                 // Changing the color polyline according to the mode
-                lineOptions.color(Color.RED);
+                lineOptions.color(Color.BLUE);
             }
 
             // Drawing polyline in the Google Map for the i-th route
