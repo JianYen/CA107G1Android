@@ -58,7 +58,7 @@ public class RoomTypeImageTask extends AsyncTask<Object, Integer, Bitmap> {
         if (bitmap != null) {
             imageView.setImageBitmap(bitmap);
         } else {
-            imageView.setImageResource(R.drawable.beauty);
+            imageView.setImageResource(R.drawable.ic_petdefault);
         }
     }
 

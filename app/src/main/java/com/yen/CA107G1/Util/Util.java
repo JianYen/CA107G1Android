@@ -16,7 +16,8 @@ import java.util.List;
 public class Util {
     // 偏好設定檔案名稱
     public final static String PREF_FILE = "preference";
-    public static List<ShopItemVO> cart = new ArrayList<>();
+    public static ArrayList<ShopItemVO> CART = new ArrayList<>();
+
     // check if the device connect to the network
     public static boolean networkConnected(Activity activity) {
         ConnectivityManager conManager =
@@ -26,7 +27,7 @@ public class Util {
     }
 
     public static List<ShopItemVO> getCart(){
-        return cart;
+        return CART;
     }
 
     /*

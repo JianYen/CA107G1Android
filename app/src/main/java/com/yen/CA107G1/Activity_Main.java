@@ -36,6 +36,7 @@ import com.yen.CA107G1.HotelRoom.Activity_HotelRoomType_Browse;
 import com.yen.CA107G1.Member.Activity_MemberLogin;
 import com.yen.CA107G1.Member.Activity_Member_Order;
 import com.yen.CA107G1.Pet.Activity_PetList;
+import com.yen.CA107G1.Shop.Activity_MyShopItem_Browse;
 import com.yen.CA107G1.Shop.Activity_MyShopItem_Detail;
 import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.MemberVO;
@@ -266,6 +267,9 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
             case R.id.empLogin:
                 intent.setClass(Activity_Main.this, Activity_EmpLogin.class);
                 break;
+
+            case R.id.nav_shop:
+                intent.setClass(Activity_Main.this,Activity_MyShopItem_Browse.class);
 
         }
         startActivity(intent);

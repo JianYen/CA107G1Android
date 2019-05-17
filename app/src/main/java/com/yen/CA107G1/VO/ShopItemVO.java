@@ -15,6 +15,18 @@ public class ShopItemVO implements Serializable {
     private Integer s_item_count;
     private Integer cart_count;
 
+    @Override
+    // 要比對欲加入商品與購物車內商品的isbn是否相同，true則值相同
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || !(obj instanceof ShopItemVO)) {
+            return false;
+        }
+        return this.getS_item_no().equals(((ShopItemVO) obj).getS_item_no());
+    }
+
     public Integer getCart_count() {
         return cart_count;
     }

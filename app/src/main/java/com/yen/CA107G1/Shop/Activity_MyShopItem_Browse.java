@@ -61,7 +61,8 @@ public class Activity_MyShopItem_Browse extends AppCompatActivity {
         });
 
         Gson gson = new Gson();
-        Type listType = new TypeToken<List<ShopItemVO>>() {}.getType();
+        Type listType = new TypeToken<List<ShopItemVO>>() {
+        }.getType();
 
         CallServletItem callServlet = new CallServletItem();
         try {
@@ -78,14 +79,13 @@ public class Activity_MyShopItem_Browse extends AppCompatActivity {
     }
 
 
-
     private class ShopItemBrowseAdapter extends RecyclerView.Adapter<ShopItemBrowseAdapter.ViewHolder> {
         private List<ShopItemVO> teamList;
         private int imageSize;
         private Context context;
         private LayoutInflater inflater;
 
-        private ShopItemBrowseAdapter(Context context,List<ShopItemVO> teamList) {
+        private ShopItemBrowseAdapter(Context context, List<ShopItemVO> teamList) {
             this.teamList = teamList;
             this.context = context;
             inflater = LayoutInflater.from(context);
@@ -135,8 +135,9 @@ public class Activity_MyShopItem_Browse extends AppCompatActivity {
             final ShopItemVO team = teamList.get(position);
             String item_no = team.getS_item_no();
             holder.tvName.setText(team.getS_item_text());
-            holder.itemPrice.setText("$ " + String.valueOf(team.getS_item_price()));
-shopItemImgTask = new ShopItemImgTask(ServerURL.Shop_URL, item_no, imageSize, holder.ivLogo);
+            holder.itemPrice.setText("$ " + team.getS_item_price());
+            shopItemImgTask = new ShopItemImgTask(ServerURL.ShopItemCover_URL, item_no, imageSize, holder.ivLogo);
+            shopItemImgTask.execute();
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -173,14 +174,7 @@ shopItemImgTask = new ShopItemImgTask(ServerURL.Shop_URL, item_no, imageSize, ho
             holder.btnAddCart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    List<ShopItemVO> cart = Util.getCart();
-                    if(!cart.contains(team)){
-                       cart.add(team);
-                    }else{
-                        ShopItemVO siVO = cart.get(cart.indexOf(team));
-                        siVO.setCart_count(siVO.getCart_count()+1);
-                    }
-
+ShopItemVO shopItem =new ShopItemVO();
 
 
                 }

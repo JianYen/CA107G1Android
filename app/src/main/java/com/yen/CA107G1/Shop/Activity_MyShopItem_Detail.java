@@ -9,16 +9,23 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.yen.CA107G1.HotelRoom.Activity_HotelOrderPage;
+import com.yen.CA107G1.HotelRoom.Activity_HotelRroomType_Detail;
 import com.yen.CA107G1.R;
+import com.yen.CA107G1.Server.RoomTypeImageTask;
+import com.yen.CA107G1.VO.HotelRoomTypeVO;
 import com.yen.CA107G1.VO.ShopItemVO;
 import com.yen.CA107G1.Server.CommonTask;
 import com.yen.CA107G1.Server.ServerURL;
@@ -29,87 +36,61 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class Activity_MyShopItem_Detail extends AppCompatActivity {
-    ViewPager vpShopItem;
     TextView shopItemTitle, shopItemContent;
     ShopItemImgTask shopItemImgTask;
-    List<String> shopItemImgVOList;
-    private int imageSize = getResources().getDisplayMetrics().widthPixels / 2;
     String item_no;
     ShopItemVO shopItemVO;
     Bitmap bitmap;
+    ImageView shopItemDetail;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopitem_detail);
-        vpShopItem = findViewById(R.id.vpShopItem);
-        shopItemTitle = findViewById(R.id.shopItemTitle);
-        shopItemContent = findViewById(R.id.shopItemContent);
 
+        findViews();
 
         Intent intent = getIntent();
-         shopItemVO = (ShopItemVO) intent.getExtras().getSerializable("ShopItemVO");
-
+        shopItemVO = (ShopItemVO) intent.getExtras().getSerializable("ShopItemVO");
         item_no = shopItemVO.getS_item_no();
-
-
-        try {
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "findItemNo");
-            jsonObject.addProperty("getItemNo", item_no);
-            String itemImgList = new CommonTask(ServerURL.ShopItemImg_URL, jsonObject.toString()).execute().get();
-            Type listType= new TypeToken<List<String>>(){}.getType();
-            Gson gson = new Gson();
-            shopItemImgVOList = gson.fromJson(itemImgList, listType);
-
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if (shopItemVO == null) {
+            Toast.makeText(this, "房型詳情無法顯示", Toast.LENGTH_SHORT);
+        } else {
+            showDetail(shopItemVO);
         }
-
-        vpShopItem.setAdapter(new MyPagerAdapter(Activity_MyShopItem_Detail.this, shopItemImgVOList));
-
-
-        shopItemTitle.setText(shopItemVO.getS_item_text());
-        shopItemContent.setText(shopItemVO.getS_item_describe());
-
 
     }
 
-    private class MyPagerAdapter extends PagerAdapter {
-        private Context context;
-        private List list;
+    public void findViews() {
+        shopItemDetail = findViewById(R.id.shopItemDetail);
+        shopItemTitle = findViewById(R.id.shopItemTitle);
+        shopItemContent = findViewById(R.id.shopItemContent);
+    }
 
-        public MyPagerAdapter(Context context, List<String> list) {
-            this.context = context;
-            this.list = list;
+    public void showDetail(final ShopItemVO shopItemVO) {
+        String rtno = shopItemVO.getS_item_no();
+        final int imageSize = getResources().getDisplayMetrics().widthPixels / 2;
+
+
+        try {
+            shopItemImgTask = new ShopItemImgTask(ServerURL.ShopItemCover_URL, rtno, imageSize);
+            bitmap = shopItemImgTask.execute().get();
+
+        } catch (Exception e) {
+            Log.e("ShowDetail", e.toString());
         }
 
-        @Override
-        public int getCount() {
-            return list.size();
+        if (bitmap != null) {
+
+            shopItemDetail.setImageBitmap(bitmap);
+
+        } else {
+            shopItemDetail.setImageResource(R.drawable.ic_petdefault);
         }
 
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-
-            // 佈局
-            View itemView = LayoutInflater.from(container.getContext()).inflate(R.layout.card_image, container, false);
-
-            // 佈局元件內容
-            ImageView imageView = itemView.findViewById(R.id.imageForShop);
-
-            // 加載
-            (container).addView(itemView);
-
-            return itemView;
-        }
+        shopItemTitle.setText(shopItemVO.getS_item_text());
+        shopItemContent.setText(shopItemVO.getS_item_describe());
 
     }
 

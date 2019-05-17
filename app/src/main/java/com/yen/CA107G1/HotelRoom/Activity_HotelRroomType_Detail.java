@@ -83,10 +83,7 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
             jsonObject.addProperty("action", "getMsg");
             jsonObject.addProperty("roomTypeNo",hotelRoomTypeVO.getH_roomtype_no());
             String jsonOut = jsonObject.toString();
-            Log.e("我是ROOMTYPE的onStart", jsonOut);
             updateUI(jsonOut);
-            Log.e("我是ROOMTYPE的onStart", "我在這");
-            Log.e("我是ROOMTYPE的onStart", hotelRoomTypeVO.getH_roomtype_no());
         } else {
             Toast.makeText(this, "no network connection avaliable", Toast.LENGTH_SHORT);
         }

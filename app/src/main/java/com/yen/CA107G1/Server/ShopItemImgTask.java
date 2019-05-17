@@ -18,7 +18,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ShopItemImgTask extends AsyncTask<Object, Integer, Bitmap> {
-    private final static String TAG = "RoomTypeImageTask";
+    private final static String TAG = "ShopItemImageCoverTask";
     private String url, shopItemNo;
     private int imageSize;
     /* ImageTask的屬性strong reference到BookListAdapter內的imageView不好，
@@ -43,7 +43,7 @@ public class ShopItemImgTask extends AsyncTask<Object, Integer, Bitmap> {
     @Override
     protected Bitmap doInBackground(Object... objects) {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("action", "getImage");
+        jsonObject.addProperty("action", "getItemCover");
         jsonObject.addProperty("shopItemNo", shopItemNo);
         jsonObject.addProperty("imageSize", imageSize);
         return getRemoteImage(url, jsonObject.toString());
@@ -58,7 +58,7 @@ public class ShopItemImgTask extends AsyncTask<Object, Integer, Bitmap> {
         if (bitmap != null) {
             imageView.setImageBitmap(bitmap);
         } else {
-            imageView.setImageResource(R.drawable.beauty);
+            imageView.setImageResource(R.drawable.ic_petdefault);
         }
     }
 
