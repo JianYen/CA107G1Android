@@ -36,8 +36,10 @@ import com.yen.CA107G1.HotelRoom.Activity_HotelRoomType_Browse;
 import com.yen.CA107G1.Member.Activity_MemberLogin;
 import com.yen.CA107G1.Member.Activity_Member_Order;
 import com.yen.CA107G1.Pet.Activity_PetList;
+import com.yen.CA107G1.Shop.Activity_Cart;
 import com.yen.CA107G1.Shop.Activity_MyShopItem_Browse;
 import com.yen.CA107G1.Shop.Activity_MyShopItem_Detail;
+import com.yen.CA107G1.Shop.Fragment_ShopHomePage;
 import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.MemberVO;
 import com.yen.CA107G1.Server.CommonTask;
@@ -105,9 +107,9 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                         case R.id.nav_hotel:
                             viewPager.setCurrentItem(1);
                             return true;
-//                        case R.id.nav_shop:
-//                            viewPager.setCurrentItem(2);
-//                            return true;
+                        case R.id.nav_shop:
+                            viewPager.setCurrentItem(2);
+                            return true;
                     }
                     return true;
                 }
@@ -186,10 +188,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        View view = navigationView.getHeaderView(0);
-//        circleImageView = findViewById(R.id.circleImage);
-//        navName = view.findViewById(R.id.navName);
-//        navLogin = view.findViewById(R.id.navLogin);
         if (requestCode != LOGIN_REQUEST) {
             return;
         }
@@ -222,15 +220,15 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 case 1:
                     return new Fragment_HotelPage();
 
-//                case 2:
-//                    return new Fragment_PetList();
+                case 2:
+                    return new Fragment_ShopHomePage();
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     }
 
@@ -269,7 +267,13 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 break;
 
             case R.id.nav_shop:
-                intent.setClass(Activity_Main.this,Activity_MyShopItem_Browse.class);
+                intent.setClass(Activity_Main.this, Activity_MyShopItem_Browse.class);
+                break;
+
+            case R.id.nav_cart:
+                intent.setClass(Activity_Main.this, Activity_Cart.class);
+                break;
+
 
         }
         startActivity(intent);

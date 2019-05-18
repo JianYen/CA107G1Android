@@ -6,7 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.Toast;
 
+import com.yen.CA107G1.VO.CartVO;
 import com.yen.CA107G1.VO.ShopItemVO;
 
 import java.io.ByteArrayOutputStream;
@@ -16,7 +18,7 @@ import java.util.List;
 public class Util {
     // 偏好設定檔案名稱
     public final static String PREF_FILE = "preference";
-    public static ArrayList<ShopItemVO> CART = new ArrayList<>();
+    public static ArrayList<CartVO> CART = new ArrayList<>();
 
     // check if the device connect to the network
     public static boolean networkConnected(Activity activity) {
@@ -26,9 +28,9 @@ public class Util {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    public static List<ShopItemVO> getCart(){
-        return CART;
-    }
+
+
+
 
     /*
      * options.inJustDecodeBounds取得原始圖片寬度與高度資訊 (但不會在記憶體裡建立實體)
@@ -51,5 +53,13 @@ public class Util {
         // 轉成PNG不會失真，所以quality參數值會被忽略
         srcBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         return baos.toByteArray();
+    }
+
+    public static void showToast(Context context, int messageResId) {
+        Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showToast(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 }

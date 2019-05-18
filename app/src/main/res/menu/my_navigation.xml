@@ -13,10 +13,10 @@
         android:icon="@drawable/ic_hotel"
         />
 
-    <!--<item-->
-        <!--android:id="@+id/nav_shop"-->
-        <!--android:title="我的"-->
-        <!--android:icon="@drawable/ic_order"/>-->
+    <item
+        android:id="@+id/nav_shop"
+        android:title="商城"
+        android:icon="@drawable/ic_order"/>
 
 
 </menu>

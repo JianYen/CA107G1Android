@@ -27,6 +27,7 @@ public class ServerURL {
     public static final String News_URL = "http://10.120.26.6:8081/CA107G1/Android/NewsServlet.do";
     public static final String Emp_URL = "http://10.120.26.6:8081/CA107G1/Android/EmpServlet.do";
     public static final String ShopItemCover_URL = "http://10.120.26.6:8081/CA107G1/Android/ShopItemCoverServlet.do";
+    public static final String ShopOrdServlet_URL = "http://10.120.26.6:8081/CA107G1/Android/ShopOrdServlet.do";
 
 
 }

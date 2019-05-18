@@ -22,6 +22,10 @@
             android:id="@+id/nav_shop"
             android:title="商品"/>
 
+        <item
+            android:id="@+id/nav_cart"
+            android:title="購物車"/>
+
 
 
     </group>

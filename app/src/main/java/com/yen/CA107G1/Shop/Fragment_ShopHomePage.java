@@ -1,16 +1,16 @@
 package com.yen.CA107G1.Shop;
 
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,33 +22,33 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yen.CA107G1.R;
-import com.yen.CA107G1.Util.Util;
-import com.yen.CA107G1.VO.CartVO;
-import com.yen.CA107G1.VO.ShopItemVO;
 import com.yen.CA107G1.Server.CallServletItem;
 import com.yen.CA107G1.Server.ServerURL;
 import com.yen.CA107G1.Server.ShopItemImgTask;
+import com.yen.CA107G1.Util.Util;
+import com.yen.CA107G1.VO.CartVO;
+import com.yen.CA107G1.VO.ShopItemVO;
 
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class Activity_MyShopItem_Browse extends AppCompatActivity {
+public class Fragment_ShopHomePage extends Fragment {
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private ImageView sort;
     private ShopItemImgTask shopItemImgTask;
     private RecyclerView recyclerView;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shopitem_browse);
-        recyclerView = findViewById(R.id.recyclerView);
+        View view = inflater.inflate(R.layout.activity_shopitem_browse, container, false);
 
+        sort = view.findViewById(R.id.sort);
 
-        sort = findViewById(R.id.sort);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        recyclerView=view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         sort.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +71,7 @@ public class Activity_MyShopItem_Browse extends AppCompatActivity {
         CallServletItem callServlet = new CallServletItem();
         try {
             List<ShopItemVO> shopItemVO = gson.fromJson(callServlet.execute(ServerURL.Shop_URL).get(), listType);
-            recyclerView.setAdapter(new ShopItemBrowseAdapter(this, shopItemVO));
+            recyclerView.setAdapter(new Fragment_ShopHomePage.ShopItemBrowseAdapter(getActivity(), shopItemVO));
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -79,10 +79,11 @@ public class Activity_MyShopItem_Browse extends AppCompatActivity {
         }
 
 
+        return view;
     }
 
 
-    private class ShopItemBrowseAdapter extends RecyclerView.Adapter<ShopItemBrowseAdapter.ViewHolder> {
+    private class ShopItemBrowseAdapter extends RecyclerView.Adapter<Fragment_ShopHomePage.ShopItemBrowseAdapter.ViewHolder> {
         private List<ShopItemVO> teamList;
         private int imageSize;
         private Context context;
@@ -126,13 +127,13 @@ public class Activity_MyShopItem_Browse extends AppCompatActivity {
 
 
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public Fragment_ShopHomePage.ShopItemBrowseAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = inflater.inflate(R.layout.card_shopitem, parent, false);
-            return new ViewHolder(view);
+            return new Fragment_ShopHomePage.ShopItemBrowseAdapter.ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(final ViewHolder holder, final int position) {
+        public void onBindViewHolder(final Fragment_ShopHomePage.ShopItemBrowseAdapter.ViewHolder holder, final int position) {
 
             //將資料注入到View裡
             final ShopItemVO team = teamList.get(position);
@@ -145,7 +146,7 @@ public class Activity_MyShopItem_Browse extends AppCompatActivity {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(Activity_MyShopItem_Browse.this, team.getS_item_text(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), team.getS_item_text(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("ShopItemVO", team);
@@ -177,36 +178,41 @@ public class Activity_MyShopItem_Browse extends AppCompatActivity {
             holder.btnAddCart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CartVO cartVO = new CartVO(team, 1);
-                    int index = Util.CART.indexOf(cartVO);
-                    if (index == -1) {
-                        Util.CART.add(cartVO);
-                    } else {
-                        cartVO = Util.CART.get(index);
-                        cartVO.setQuantity(cartVO.getQuantity() + 1);
-                    }
-                    StringBuilder sb = new StringBuilder();
-                    for (CartVO cartProduct : Util.CART) {
-                        String text = "\n-" + cartProduct.getS_item_text() + " x "
-                                + cartProduct.getQuantity();
-                        sb.append(text);
-                    }
+
+
                     new AlertDialog.Builder(context)
                             .setIcon(R.drawable.ic_cart)
-                            .setTitle("Hello")
-                            .setMessage("helloo")
-                            .setNeutralButton("ys",
+                            .setTitle("購物車")
+                            .setMessage("確定要加入購物車嗎")
+                            .setPositiveButton("確定",
                                     new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            CartVO cartVO = new CartVO(team, 1);
+                                            int index = Util.CART.indexOf(cartVO);
+                                            if (index == -1) {
+                                                Util.CART.add(cartVO);
+                                            } else {
+                                                cartVO = Util.CART.get(index);
+                                                cartVO.setQuantity(cartVO.getQuantity() + 1);
+                                            }
+                                            StringBuilder sb = new StringBuilder();
+                                            for (CartVO cartProduct : Util.CART) {
+                                                String text = "\n-" + cartProduct.getS_item_text() + " x "
+                                                        + cartProduct.getQuantity();
+                                                sb.append(text);
+                                            }
+                                        }
+                                    })
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             dialog.cancel();
                                         }
-                                    }).show();
+                                    }
+                            ).show();
                 }
             });
-                }
-
-
         }
 
 
@@ -214,3 +220,5 @@ public class Activity_MyShopItem_Browse extends AppCompatActivity {
 
 
 
+
+}
