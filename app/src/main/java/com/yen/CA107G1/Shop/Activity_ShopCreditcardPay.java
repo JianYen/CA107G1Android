@@ -100,6 +100,7 @@ public class Activity_ShopCreditcardPay extends AppCompatActivity {
             Intent intentOrder = new Intent(this, Activity_Main.class);
             intentOrder.putExtras(bundle);
             startActivity(intentOrder);
+            Toast.makeText(this, "訂單創建成功", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.yen.CA107G1.HotelRoom.Activity_HotelRroomType_Detail;
+import com.yen.CA107G1.HotelRoom.Fragment_HotelPage;
 import com.yen.CA107G1.Server.CommonTask;
 import com.yen.CA107G1.Server.ServerURL;
 import com.yen.CA107G1.Util.Util;
@@ -28,6 +29,7 @@ import com.yen.CA107G1.VO.HomePageVO;
 import com.yen.CA107G1.VO.HotelroomtypemsgVO;
 import com.yen.CA107G1.VO.NewsVO;
 import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
 
 import java.lang.reflect.Type;
@@ -36,36 +38,46 @@ import java.util.List;
 
 
 public class Fragment_HomePage extends Fragment {
-    private Banner banner;
+    private Banner homePageBanner;
     private ImageView homePageImg;
     private PagerSnapHelper snapHelper;
     private RecyclerView recyclerView, newsRc;
-    private  CommonTask getNewsTask;
+    private CommonTask getNewsTask;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hompage, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerView);
+//        recyclerView = view.findViewById(R.id.recyclerView);
         newsRc = view.findViewById(R.id.newsRcView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
 
-        newsRc.setHasFixedSize(true);
-newsRc.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-
-        List<HomePageVO> hpList = new ArrayList<>();
-        hpList.add(new HomePageVO(R.drawable.icon_member, "會員資料"));
-        hpList.add(new HomePageVO(R.drawable.ic_like, "我的收藏"));
-        hpList.add(new HomePageVO(R.drawable.icon_pet, "寵物資料"));
-        hpList.add(new HomePageVO(R.drawable.icon_order, "我的訂單"));
-
+//        newsRc.setHasFixedSize(true);
+//        newsRc.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+//
+//        List<HomePageVO> hpList = new ArrayList<>();
+//        hpList.add(new HomePageVO(R.drawable.ad, "會員資料"));
+//        hpList.add(new HomePageVO(R.drawable.ad2, "我的收藏"));
+//        hpList.add(new HomePageVO(R.drawable.ad3, "寵物資料"));
+//        hpList.add(new HomePageVO(R.drawable.icon_order, "我的訂單"));
 
 
         snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
-        recyclerView.setAdapter(new HomePageAdapter(hpList));
-
+//        recyclerView.setAdapter(new HomePageAdapter(hpList));
+        homePageBanner = view.findViewById(R.id.homePageBanner);
+        homePageBanner.setImageLoader(new Fragment_HomePage.GlideImageLoader());
+        List<Integer> list = new ArrayList<>();
+        list.add(R.drawable.r1);
+        list.add(R.drawable.r2);
+        list.add(R.drawable.r3);
+        list.add(R.drawable.r4);
+        list.add(R.drawable.r5);
+        homePageBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
+                .setImages(list)
+                .isAutoPlay(true)
+                .setDelayTime(2000).start();
 
         return view;
     }
@@ -86,7 +98,6 @@ newsRc.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutMan
             jsonObject.addProperty("action", "getAll");
             String jsonOut = jsonObject.toString();
             updateUI(jsonOut);
-            Log.e("我是ROOMTYPE的onStart", "我在這");
         } else {
             Toast.makeText(getActivity(), "no network connection avaliable", Toast.LENGTH_SHORT);
         }
@@ -98,19 +109,18 @@ newsRc.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutMan
 
         try {
             String jsonIn = getNewsTask.execute().get();
-            Type listType = new TypeToken<List<NewsVO>>() {}.getType();
+            Type listType = new TypeToken<List<NewsVO>>() {
+            }.getType();
             newsList = new Gson().fromJson(jsonIn, listType);
 
         } catch (Exception e) {
-            Log.e("我是RoomtypeDetail的", e.toString());
+            e.printStackTrace();
         }
         if (newsList == null || newsList.isEmpty()) {
             Toast.makeText(getActivity(), "NewsList not found", Toast.LENGTH_SHORT);
-            Log.e("我是NewsAdapter", "Adapter沒有被填充");
 
         } else {
             newsRc.setAdapter(new Fragment_HomePage.NewsAdapter(getActivity(), newsList));
-            Log.e("ROOMTYPEDETAIL的updateUI", "我是ROOMTYPE的MSG");
         }
 
     }
@@ -193,7 +203,7 @@ newsRc.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutMan
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             final NewsVO newsVO = newsList.get(position);
-            holder.newsText.setText("\uD83D\uDE38"+newsVO.getNews_text());
+            holder.newsText.setText("\uD83D\uDE38" + newsVO.getNews_text());
         }
 
         @Override
@@ -201,6 +211,16 @@ newsRc.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutMan
             return newsList.size();
         }
 
+
+    }
+
+    public class GlideImageLoader extends ImageLoader {
+
+
+        public void displayImage(Context context, Object path, ImageView imageView) {
+            Glide.with(context).load((Integer) path).into(imageView);
+
+        }
 
     }
 

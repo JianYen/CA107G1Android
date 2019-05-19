@@ -60,15 +60,17 @@ public class Fragment_HotelPage extends Fragment {
         loginSPF = getActivity().getSharedPreferences(Util.PREF_FILE, Context.MODE_PRIVATE);
 
 
-        hotelBanner= view.findViewById(R.id.hotelBanner);
+        hotelBanner = view.findViewById(R.id.hotelBanner);
         hotelBanner.setImageLoader(new GlideImageLoader());
         List<Integer> list = new ArrayList<>();
 
         list.add(R.drawable.ad);
         list.add(R.drawable.ad2);
         list.add(R.drawable.ad3);
-        hotelBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR).setImages(list).isAutoPlay(true)
-        .setDelayTime(2000).start();
+        hotelBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
+                .setImages(list)
+                .isAutoPlay(true)
+                .setDelayTime(2000).start();
 
         return view;
     }
@@ -100,7 +102,8 @@ public class Fragment_HotelPage extends Fragment {
 
         try {
             String jsonIn = getRoomTypeTask.execute().get();
-            Type listType = new TypeToken<List<HotelRoomTypeVO>>() {}.getType();
+            Type listType = new TypeToken<List<HotelRoomTypeVO>>() {
+            }.getType();
             roomList = new Gson().fromJson(jsonIn, listType);
 
         } catch (Exception e) {
@@ -120,7 +123,6 @@ public class Fragment_HotelPage extends Fragment {
         private LayoutInflater layoutInflater;
         private List<HotelRoomTypeVO> roomTypelist;
         private int imageSize;
-
 
 
         HotelRoomTypeAdapterFG(Context context, List<HotelRoomTypeVO> roomTypelist) {
@@ -166,11 +168,11 @@ public class Fragment_HotelPage extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (loginSPF.getBoolean("login", false ) == true) {
+                    if (loginSPF.getBoolean("login", false) == true) {
                         Intent intent = new Intent(getActivity(), Activity_HotelRroomType_Detail.class);
                         intent.putExtra("roomTypeVO", roomTypeVO);
                         startActivity(intent);
-                    }else {
+                    } else {
                         new AlertDialog.Builder(getActivity()).setTitle("請先登入")
                                 .setMessage("您現在尚未登入～")
                                 .setPositiveButton("GO,現在登入去", new DialogInterface.OnClickListener() {
@@ -192,7 +194,6 @@ public class Fragment_HotelPage extends Fragment {
             });
 
 
-
         }
 
 
@@ -202,9 +203,8 @@ public class Fragment_HotelPage extends Fragment {
         }
 
 
-
-
     }
+
     public class GlideImageLoader extends ImageLoader {
 
 

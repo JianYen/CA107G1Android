@@ -82,15 +82,9 @@ public class Activity_HotelOrderPage extends AppCompatActivity {
                 Util.PREF_FILE, MODE_PRIVATE);
         //取回並還原MemberVO
         String memberVO = sharedPreferences.getString("member", "");
-        Toast.makeText(this, memberVO, Toast.LENGTH_SHORT).show();
         Gson gson = new Gson();
         member = gson.fromJson(memberVO, MemberVO.class);
-        btnInfoHotel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendAddress.setText("桃園市中壢區中大路300號");
-            }
-        });
+
     }
 
     public void findViews() {
@@ -151,6 +145,10 @@ public class Activity_HotelOrderPage extends AppCompatActivity {
         CheckOutDatePickerFragment datePickerFragment = new CheckOutDatePickerFragment();
         FragmentManager checkoutFM = getSupportFragmentManager();
         datePickerFragment.show(checkoutFM, "checkOutPicker");
+    }
+
+    public void btnHotelAddMagic(View view) {
+        sendAddress.setText("桃園市中壢區中大路300號");
     }
 
 

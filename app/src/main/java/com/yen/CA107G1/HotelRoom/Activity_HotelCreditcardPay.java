@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -71,6 +72,7 @@ public class Activity_HotelCreditcardPay extends AppCompatActivity {
         }
         Intent intent = new Intent(Activity_HotelCreditcardPay.this, Activity_Main.class);
         startActivity(intent);
+        Toast.makeText(this, "訂單創建成功", Toast.LENGTH_SHORT).show();
     }
 
 

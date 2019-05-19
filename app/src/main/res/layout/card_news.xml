@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/newsText"
-            android:textSize="30sp"
+            android:textSize="18sp"
             android:shadowRadius="2"
             android:layout_marginLeft="2dp"
             android:layout_width="match_parent"
