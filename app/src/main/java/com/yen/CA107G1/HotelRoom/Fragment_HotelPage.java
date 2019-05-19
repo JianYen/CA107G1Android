@@ -89,7 +89,6 @@ public class Fragment_HotelPage extends Fragment {
             jsonObject.addProperty("action", "getAll");
             String jsonOut = jsonObject.toString();
             updateUI(jsonOut);
-            Log.e("我是ROOMTYPE的onStart", "我在這");
         } else {
             Toast.makeText(getActivity(), "no network connection avaliable", Toast.LENGTH_SHORT);
         }
@@ -109,11 +108,9 @@ public class Fragment_HotelPage extends Fragment {
         }
         if (roomList == null || roomList.isEmpty()) {
             Toast.makeText(getActivity(), "roomTypeList not found", Toast.LENGTH_SHORT);
-            Log.e("i'aaaa", "Adapter沒有被填充");
 
         } else {
             HotelRoomTypeRecyclerviewFG.setAdapter(new HotelRoomTypeAdapterFG(getActivity(), roomList));
-            Log.e("i'aaaa", "我是ROOMTYPE的");
         }
 
     }
@@ -159,7 +156,6 @@ public class Fragment_HotelPage extends Fragment {
             String url = ServerURL.RoomType_URL;
             String roomTypeNo = roomTypeVO.getH_roomtype_no();
             roomTypeImageTask = new RoomTypeImageTask(url, roomTypeNo, imageSize, holder.roomTypeImageViewFG);
-            Log.e("我是RoomTypeImg的", holder.roomTypeImageViewFG.toString());
 
             roomTypeImageTask.execute();
 

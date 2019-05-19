@@ -55,7 +55,6 @@ public class Activity_HotelRoomType_Browse extends AppCompatActivity {
             jsonObject.addProperty("action", "getAll");
             String jsonOut = jsonObject.toString();
             updateUI(jsonOut);
-            Log.e("11111111111111", "我在這");
         } else {
             Toast.makeText(this, "no network connection avaliable", Toast.LENGTH_SHORT);
         }
@@ -74,11 +73,9 @@ public class Activity_HotelRoomType_Browse extends AppCompatActivity {
         }
         if (roomList == null || roomList.isEmpty()) {
             Toast.makeText(this, "roomTypeList not found", Toast.LENGTH_SHORT);
-            Log.e("i'aaaa", "Adapter沒有被填充");
 
         } else {
             hotelRoomTypeRcview.setAdapter(new HotelRoomTypeAdapter(this, roomList));
-            Log.e("i'aaaa", "iaaaaaaaaaaaaaa42121231132");
         }
 
     }
@@ -109,7 +106,6 @@ public class Activity_HotelRoomType_Browse extends AppCompatActivity {
             String url = ServerURL.RoomType_URL;
             String roomTypeNo = roomTypeVO.getH_roomtype_no();
             roomTypeImageTask = new RoomTypeImageTask(url, roomTypeNo, imageSize, holder.roomTypeImageView);
-            Log.e("9999999999999999", holder.roomTypeImageView.toString());
             roomTypeImageTask.execute();
 
             holder.roomTypeTitle.setText(roomTypeVO.getH_roomtype_text());

@@ -35,7 +35,7 @@ import java.util.concurrent.ExecutionException;
 
 public class Activity_MyShopItem_Browse extends AppCompatActivity {
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
-    private ImageView sort;
+    private ImageView checkCart;
     private ShopItemImgTask shopItemImgTask;
     private RecyclerView recyclerView;
 
@@ -47,22 +47,10 @@ public class Activity_MyShopItem_Browse extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
 
 
-        sort = findViewById(R.id.sort);
+        checkCart = findViewById(R.id.checkCart);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
-        sort.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (staggeredGridLayoutManager.getSpanCount()) {
-                    case 1:
-                        staggeredGridLayoutManager.setSpanCount(2);
-                        break;
-                    case 2:
-                        staggeredGridLayoutManager.setSpanCount(1);
-                        break;
-                }
-            }
-        });
+
 
         Gson gson = new Gson();
         Type listType = new TypeToken<List<ShopItemVO>>() {
@@ -204,13 +192,13 @@ public class Activity_MyShopItem_Browse extends AppCompatActivity {
                                     }).show();
                 }
             });
-                }
-
-
         }
 
 
     }
+
+
+}
 
 
 

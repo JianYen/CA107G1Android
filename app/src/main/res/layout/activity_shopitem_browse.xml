@@ -15,7 +15,7 @@
 
 
                         <ImageView
-                            android:id="@+id/sort"
+                            android:id="@+id/checkCart"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:layout_marginTop="8dp"
@@ -26,7 +26,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="1.0"
                             android:layout_gravity="right"
-                            app:srcCompat="@drawable/sort" />
+                            app:srcCompat="@drawable/ic_cart" />
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recyclerView"

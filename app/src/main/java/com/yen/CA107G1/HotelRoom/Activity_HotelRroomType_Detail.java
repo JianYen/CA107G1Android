@@ -99,15 +99,13 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
             msgList = new Gson().fromJson(jsonIn, listType);
 
         } catch (Exception e) {
-            Log.e("我是RoomtypeDetail的", e.toString());
+            e.printStackTrace();
         }
         if (msgList == null || msgList.isEmpty()) {
             Toast.makeText(this, "roomTypeList not found", Toast.LENGTH_SHORT);
-            Log.e("RoomDetail的UpDATEUI", "Adapter沒有被填充");
 
         } else {
             hotelMsgRcView.setAdapter(new Activity_HotelRroomType_Detail.HotelMsgAdapter(this, msgList));
-            Log.e("ROOMTYPEDETAIL的updateUI", "我是ROOMTYPE的MSG");
         }
 
     }

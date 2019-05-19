@@ -35,9 +35,11 @@ import java.util.concurrent.ExecutionException;
 
 public class Fragment_ShopHomePage extends Fragment {
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
-    private ImageView sort;
+    private ImageView checkCart;
     private ShopItemImgTask shopItemImgTask;
     private RecyclerView recyclerView;
+    private StringBuilder sb;
+    private String message;
 
     @Nullable
     @Override
@@ -45,22 +47,17 @@ public class Fragment_ShopHomePage extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_shopitem_browse, container, false);
 
-        sort = view.findViewById(R.id.sort);
+        checkCart = view.findViewById(R.id.checkCart);
 
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
-        recyclerView=view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
-        sort.setOnClickListener(new View.OnClickListener() {
+
+        checkCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (staggeredGridLayoutManager.getSpanCount()) {
-                    case 1:
-                        staggeredGridLayoutManager.setSpanCount(2);
-                        break;
-                    case 2:
-                        staggeredGridLayoutManager.setSpanCount(1);
-                        break;
-                }
+                Intent intent = new Intent(getActivity(), Activity_Cart.class);
+                startActivity(intent);
             }
         });
 
@@ -182,8 +179,8 @@ public class Fragment_ShopHomePage extends Fragment {
 
                     new AlertDialog.Builder(context)
                             .setIcon(R.drawable.ic_cart)
-                            .setTitle("購物車")
-                            .setMessage("確定要加入購物車嗎")
+                            .setTitle("確定要加入購物車嗎")
+                            .setMessage(message)
                             .setPositiveButton("確定",
                                     new DialogInterface.OnClickListener() {
                                         @Override
@@ -196,12 +193,14 @@ public class Fragment_ShopHomePage extends Fragment {
                                                 cartVO = Util.CART.get(index);
                                                 cartVO.setQuantity(cartVO.getQuantity() + 1);
                                             }
-                                            StringBuilder sb = new StringBuilder();
+                                            sb = new StringBuilder();
                                             for (CartVO cartProduct : Util.CART) {
                                                 String text = "\n-" + cartProduct.getS_item_text() + " x "
                                                         + cartProduct.getQuantity();
                                                 sb.append(text);
+
                                             }
+                                            message = "目前購物車有" + "\n 「" + team.getS_item_text() + "」";
                                         }
                                     })
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -217,8 +216,6 @@ public class Fragment_ShopHomePage extends Fragment {
 
 
     }
-
-
 
 
 }

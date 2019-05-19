@@ -4,25 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btCheckout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onCheckoutClick"
-            android:text="下訂去" />
-
-        <Button
-            android:id="@+id/btEmptyCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onEmptyCartClick"
-            android:text="清空購物車" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layoutEmpty"
@@ -50,13 +32,35 @@
         android:id="@+id/tvTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="total: 0"
-        android:textSize="16sp" />
+        android:text="總金額: 0"
+        android:textSize="24sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvItems"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="500dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btCheckout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onCheckoutClick"
+            android:text="下訂去" />
+
+        <Button
+            android:id="@+id/btEmptyCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onEmptyCartClick"
+            android:text="清空購物車" />
+    </LinearLayout>
 
 
 </LinearLayout>

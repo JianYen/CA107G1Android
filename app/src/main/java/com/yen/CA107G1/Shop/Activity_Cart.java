@@ -77,11 +77,11 @@ public class Activity_Cart extends AppCompatActivity {
     }
 
     private void showTotal(List<CartVO> cartList) {
-        double total = 0;
+        int total = 0;
         for (CartVO item : cartList) {
             total += item.getS_item_price() * item.getQuantity();
         }
-        String text = "Total: " + total;
+        String text = "總金額: " + total + " 元$";
         tvTotal.setText(text);
     }
 
