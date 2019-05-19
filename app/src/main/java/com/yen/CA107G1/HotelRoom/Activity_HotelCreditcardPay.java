@@ -20,7 +20,7 @@ import com.yen.CA107G1.Server.ServerURL;
 
 import java.util.concurrent.ExecutionException;
 
-public class Activity_CredicardPay extends AppCompatActivity {
+public class Activity_HotelCreditcardPay extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private HotelOrderVO hotelOrderVO;
     private Button btnConfirm, btnMagic, btnCancel;
@@ -29,7 +29,7 @@ public class Activity_CredicardPay extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_credicard_pay);
+        setContentView(R.layout.activity_hotelcreditcard_pay);
 
         findViews();
     }
@@ -69,7 +69,7 @@ public class Activity_CredicardPay extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Intent intent = new Intent(Activity_CredicardPay.this, Activity_Main.class);
+        Intent intent = new Intent(Activity_HotelCreditcardPay.this, Activity_Main.class);
         startActivity(intent);
     }
 
@@ -81,5 +81,9 @@ public class Activity_CredicardPay extends AppCompatActivity {
                 card4.setText("0821");
                 card5.setText("01/24");
                 card6.setText("693");
+    }
+
+    public void btnCancelHotel(View view) {
+        finish();
     }
 }

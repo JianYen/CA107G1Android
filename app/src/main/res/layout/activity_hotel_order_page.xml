@@ -172,5 +172,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/selectedRoomType" />
 
+    <Button
+        android:id="@+id/btnInfoHotel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="597dp" />
+
 
 </android.support.constraint.ConstraintLayout>

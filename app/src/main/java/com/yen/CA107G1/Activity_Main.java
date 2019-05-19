@@ -266,9 +266,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 intent.setClass(Activity_Main.this, Activity_EmpLogin.class);
                 break;
 
-            case R.id.nav_shop:
-                intent.setClass(Activity_Main.this, Activity_MyShopItem_Browse.class);
-                break;
 
             case R.id.nav_cart:
                 intent.setClass(Activity_Main.this, Activity_Cart.class);

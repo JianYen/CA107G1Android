@@ -47,7 +47,7 @@ public class Activity_HotelOrderPage extends AppCompatActivity {
     private ImageView selectedRoomType;
     private static TextView showCheckin, showCheckout;
     private TextView orderPrice;
-    private Button checkinPicker, checkoutPicker, insertRoomOrder;
+    private Button checkinPicker, checkoutPicker, insertRoomOrder, btnInfoHotel;
     private Spinner petSpinner;
     private CommonTask petNameTask;
     private static Integer checkInyear, checkInmonth, checkInday;
@@ -85,6 +85,12 @@ public class Activity_HotelOrderPage extends AppCompatActivity {
         Toast.makeText(this, memberVO, Toast.LENGTH_SHORT).show();
         Gson gson = new Gson();
         member = gson.fromJson(memberVO, MemberVO.class);
+        btnInfoHotel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendAddress.setText("桃園市中壢區中大路300號");
+            }
+        });
     }
 
     public void findViews() {
@@ -208,31 +214,20 @@ public class Activity_HotelOrderPage extends AppCompatActivity {
                 sharedPreferences = getSharedPreferences(Util.PREF_FILE, MODE_PRIVATE);
                 String result = sharedPreferences.getString("member", null);
                 memberVO = gson.fromJson(result, MemberVO.class);
-                Log.e("我下面有過去嗎？111", memberVO.toString());
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("action", "getPetName");
                 jsonObject.addProperty("mem_no", memberVO.getMem_no());
- Log.e("我下面有過去嗎？", "1314520: "+jsonObject.toString());
- String jsonOut = gson.toJson(jsonObject);
+                String jsonOut = gson.toJson(jsonObject);
                 String jsonIn = new CommonTask(ServerURL.Pet_URL, gson.toJson(jsonObject)).execute().get();
-Log.e("gson.toJson jsonObject？", gson.toJson(jsonObject));
-Log.e("----------------？", "--12-4-2-45-45-7");
-Log.e("我是jsonInjsonIn21212125？", jsonIn);
 
-                Log.e("I am jsonIn", jsonIn);
-//                Log.e("jsonIn545454", jsonIn.substring(1, jsonIn.length() - 1));
                 Type listType = new TypeToken<List<PetNameVO>>() {
                 }.getType();
 
 
                 petNameList = new Gson().fromJson(jsonIn, listType);
-Log.e("我下面有過去嗎？3345678", petNameList.toString());
-                Log.e("i am peNameList", petNameList.toString());
                 List<String> petName = new ArrayList<>();
-                Log.e("我是鶴麟", String.valueOf(petNameList.size()));
                 for (int i = 0; i < petNameList.size(); i++) {
                     petName.add(petNameList.get(i).getPet_name());
-                    Log.e("我是鶴麟2號", petName.get(i).toString());
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, petName);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -243,7 +238,6 @@ Log.e("我下面有過去嗎？3345678", petNameList.toString());
 
         }
     }
-
 
 
     public void insertOrder(View view) {
@@ -271,7 +265,7 @@ Log.e("我下面有過去嗎？3345678", petNameList.toString());
 
             totalDay = (outDate.getTime() / (1000 * 24 * 60 * 60)) - (inDate.getTime() / (1000 * 24 * 60 * 60));
             int orderprice = hotelRoomTypeVO.getH_roomtype_price();
-            totalPrice = orderprice * (int)totalDay;
+            totalPrice = orderprice * (int) totalDay;
 //        orderPrice.setText(totalPrice + "$");
 
 
@@ -297,7 +291,6 @@ Log.e("我下面有過去嗎？3345678", petNameList.toString());
             java.sql.Date ord_date_end = new java.sql.Date(endDay.getTime());
 
             Integer p = petSpinner.getSelectedItemPosition();
-            Log.e("我是負的嗎", p.toString());
             PetNameVO petNameVO = petNameList.get(p);
             String pet_no = petNameVO.getPet_no();
 
@@ -329,7 +322,7 @@ Log.e("我下面有過去嗎？3345678", petNameList.toString());
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            Intent intent = new Intent(Activity_HotelOrderPage.this, Activity_CredicardPay.class);
+                            Intent intent = new Intent(Activity_HotelOrderPage.this, Activity_HotelCreditcardPay.class);
                             startActivity(intent);
 
                         }
@@ -340,7 +333,7 @@ Log.e("我下面有過去嗎？3345678", petNameList.toString());
                             dialog.cancel();
                         }
                     }).show();
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Toast.makeText(this, "請選擇日期", Toast.LENGTH_SHORT);
         }
 

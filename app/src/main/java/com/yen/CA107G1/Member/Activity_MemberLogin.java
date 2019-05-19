@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.load.engine.Resource;
 import com.google.gson.JsonObject;
+import com.yen.CA107G1.Activity_Main;
 import com.yen.CA107G1.R;
 import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.MemberVO;
@@ -129,12 +130,12 @@ public class Activity_MemberLogin extends AppCompatActivity {
                     .putString("password", password)
                     .putString("memPic", memPic64 )
                     .apply();
-            Intent intent = new Intent();
+            Intent intent = new Intent(Activity_MemberLogin.this, Activity_Main.class);
             Bundle bundle = new Bundle();
             bundle.putString("userId", user);
             intent.putExtras(bundle);
             setResult(RESULT_OK, intent);
-            finish();
+            startActivity(intent);
         } else {//登入失敗
             Toast.makeText(this, "帳號或密碼錯誤", Toast.LENGTH_SHORT).show();
         }

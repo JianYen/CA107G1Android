@@ -150,12 +150,12 @@ public class Activity_MyShopItem_Browse extends AppCompatActivity {
 
                     switch (holder.a) {
                         case 0:
-                            holder.ivBtn.setImageDrawable(getResources().getDrawable(R.drawable.like));
+                            holder.ivBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_like));
                             Toast.makeText(v.getContext(), "已加入收藏", Toast.LENGTH_SHORT).show();
                             holder.a = 1;
                             break;
                         case 1:
-                            holder.ivBtn.setImageDrawable(getResources().getDrawable(R.drawable.unlike));
+                            holder.ivBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_unlike));
                             Toast.makeText(v.getContext(), "已取消收藏", Toast.LENGTH_SHORT).show();
                             holder.a = 0;
                             break;

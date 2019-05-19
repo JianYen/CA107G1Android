@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.yen.CA107G1.Activity_Main;
+import com.yen.CA107G1.HotelRoom.Activity_HotelRroomType_Detail;
 import com.yen.CA107G1.Member.Activity_MemberLogin;
 import com.yen.CA107G1.R;
 import com.yen.CA107G1.Server.CommonTask;
@@ -53,6 +54,9 @@ public class Activity_Cart extends AppCompatActivity {
     private ShopItemImgTask shopItemImgTask;
     private Gson gson;
     private MemberVO memberVO;
+    private SharedPreferences loginSPF, shopSPF, pref;
+    private String member;
+    String memno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,8 @@ public class Activity_Cart extends AppCompatActivity {
         tvTotal = findViewById(R.id.tvTotal);
         rvItems = findViewById(R.id.rvItems);
         rvItems.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        loginSPF = getSharedPreferences(Util.PREF_FILE, MODE_PRIVATE);
+        shopSPF = getSharedPreferences(Util.PREF_FILE, MODE_PRIVATE);
     }
 
     @Override
@@ -77,7 +83,7 @@ public class Activity_Cart extends AppCompatActivity {
     }
 
     private void showTotal(List<CartVO> cartList) {
-        int total = 0;
+        double total = 0;
         for (CartVO item : cartList) {
             total += item.getS_item_price() * item.getQuantity();
         }
@@ -89,14 +95,75 @@ public class Activity_Cart extends AppCompatActivity {
         if (Util.CART == null || Util.CART.size() <= 0) {
             Toast.makeText(this, "購物車空空的", Toast.LENGTH_SHORT).show();
             return;
+        } else if (loginSPF.getBoolean("login", false) == true) {
+            pref = getSharedPreferences(Util.PREF_FILE, MODE_PRIVATE);
+            member = pref.getString("member", "");
+           gson = new GsonBuilder().setDateFormat("MMM d,yyyy HH:mm:ss aaa").create();
+            memberVO = gson.fromJson(member, MemberVO.class);
+            memno = memberVO.getMem_no();
+            if (Util.networkConnected(this)) {
+
+
+                ShopOrdVO order = new ShopOrdVO();
+                order.setMem_no(memno);
+                int sum = 0;
+                for (CartVO item : Util.CART) {
+                    sum += item.getS_item_price() * item.getQuantity();
+                }
+                java.sql.Timestamp orderTime = new java.sql.Timestamp(new GregorianCalendar().getTimeInMillis());
+                order.setS_ord_total(sum);
+                order.setCartList(Util.CART);
+                order.setS_status_no(2);
+                order.setS_ord_mem_points(0);
+                order.setOrder_time(orderTime);
+
+                shopSPF.edit().putString("shopOrder", gson.toJson(order)).apply();
+
+                new AlertDialog.Builder(this)
+                        .setTitle("確認購買嗎 ?")
+                        .setMessage("總金額為" + sum + "元")
+                        .setIcon(R.drawable.ic_paymoney)
+                        .setPositiveButton("確認結帳去", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(Activity_Cart.this, Activity_ShopOrderPage.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("還想再逛一下", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }).show();
+
+
+            }
+
+
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle("請先登入")
+                    .setMessage("您現在尚未登入～")
+                    .setPositiveButton("GO,現在登入去", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent loginIntent = new Intent(Activity_Cart.this, Activity_MemberLogin.class);
+                            startActivity(loginIntent);
+                        }
+                    })
+                    .setNegativeButton("先不要", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    }).show();
         }
-        Intent loginIntent = new Intent(this, Activity_MemberLogin.class);
-        startActivityForResult(loginIntent, REQUEST_LOGIN);
     }
 
     public void onEmptyCartClick(View view) {
         if (Util.CART == null || Util.CART.size() <= 0) {
-            Toast.makeText(this, "購物車是空的", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "購物車已經是空的!!", Toast.LENGTH_SHORT);
             return;
         }
 
@@ -129,69 +196,17 @@ public class Activity_Cart extends AppCompatActivity {
                         }).setCancelable(false).show();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_LOGIN:
-                if (resultCode == RESULT_OK) {
-                    SharedPreferences pref = getSharedPreferences(Util.PREF_FILE, MODE_PRIVATE);
-                    String member = pref.getString("member", "");
-                    Gson gson = new GsonBuilder().setDateFormat("MMM d,yyyy HH:mm:ss aaa").create();
-                    memberVO = gson.fromJson(member, MemberVO.class);
-                    String memno = memberVO.getMem_no();
-                    if (Util.networkConnected(this)) {
-
-
-                        ShopOrdVO order = new ShopOrdVO();
-                        order.setMem_no(memno);
-                        int sum = 0;
-                        for (CartVO item : Util.CART) {
-                            sum += item.getS_item_price() * item.getQuantity();
-                        }
-                        java.sql.Timestamp orderTime = new java.sql.Timestamp(new GregorianCalendar().getTimeInMillis());
-                        order.setS_ord_total(sum);
-                        order.setCartList(Util.CART);
-                        order.setS_status_no(2);
-                        order.setS_ord_mem_points(0);
-                        order.setOrder_time(orderTime);
-
-                        try {
-                            String ordStr = gson.toJson(order);
-
-                            JsonObject jsonObject = new JsonObject();
-                            jsonObject.addProperty("action", "add");
-                            jsonObject.addProperty("mem_no", memno);
-                            jsonObject.addProperty("order", ordStr);
-                            String jsonOut = jsonObject.toString();
-                            orderAddTask = new CommonTask(ServerURL.ShopOrdServlet_URL, jsonOut);
-                        } catch (NullPointerException e) {
-                            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
-                        }
-
-                        ShopOrdVO successOrder = null;
-                        try {
-                            String result = orderAddTask.execute().get();
-
-                            successOrder = gson.fromJson(result, ShopOrdVO.class);
-                        } catch (Exception e) {
-                            Log.e(TAG, e.toString());
-                        }
-
-                        if (successOrder == null) {
-                            Toast.makeText(this, "創建訂單失敗", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Util.CART.clear();
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("order", successOrder);
-                            Intent intentOrder = new Intent(this, Activity_Main.class);
-                            intentOrder.putExtras(bundle);
-                            startActivity(intentOrder);
-                        }
-                    }
-                }
-                break;
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        switch (requestCode) {
+//            case REQUEST_LOGIN:
+//                if (resultCode == RESULT_OK) {
+//
+//                }
+//                break;
+//
+//        }
+//    }
 
     private class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerViewAdapter.MyViewHolder> {
         private Context context;

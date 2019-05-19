@@ -56,7 +56,7 @@ newsRc.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutMan
 
         List<HomePageVO> hpList = new ArrayList<>();
         hpList.add(new HomePageVO(R.drawable.icon_member, "會員資料"));
-        hpList.add(new HomePageVO(R.drawable.icon_likes, "我的收藏"));
+        hpList.add(new HomePageVO(R.drawable.ic_like, "我的收藏"));
         hpList.add(new HomePageVO(R.drawable.icon_pet, "寵物資料"));
         hpList.add(new HomePageVO(R.drawable.icon_order, "我的訂單"));
 

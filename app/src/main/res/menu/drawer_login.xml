@@ -18,9 +18,6 @@
             android:icon="@drawable/order_icon"
             android:title="我的住宿訂單" />
 
-        <item
-            android:id="@+id/nav_shop"
-            android:title="商品"/>
 
         <item
             android:id="@+id/nav_cart"

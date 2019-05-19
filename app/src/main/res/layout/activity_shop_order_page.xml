@@ -6,4 +6,74 @@
     android:layout_height="match_parent"
     tools:context="com.yen.CA107G1.Shop.Activity_ShopOrderPage">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:src="@drawable/ic_info" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/shopInfoET1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:layout_marginTop="80dp"
+                android:hint="請填寫收件人姓名" />
+
+            <EditText
+                android:id="@+id/shopInfoET2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:layout_marginTop="80dp"
+                android:hint="請填寫連絡電話" />
+
+            <EditText
+                android:id="@+id/shopInfoET3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:layout_marginTop="80dp"
+                android:hint="請填寫收件地址" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnShopInfoMagic"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:onClick="shopMagic"
+                    android:layout_gravity="right|bottom" />
+
+                <Button
+                    android:id="@+id/btnShopInfoConfirm"
+                    android:layout_width="100dp"
+                    android:onClick="goShopPay"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|bottom"
+                    android:layout_weight="1"
+                    android:text="確定送出" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

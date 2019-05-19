@@ -40,7 +40,7 @@
                 android:layout_width="24dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:src="@drawable/icon_likes" />
+                 />
 
             <RatingBar
                 android:layout_width="wrap_content"

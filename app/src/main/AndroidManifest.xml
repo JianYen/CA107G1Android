@@ -22,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Shop.Activity_ShopOrderPage"></activity>
+        <activity android:name=".Shop.Activity_ShopCreditcardPay" />
         <activity android:name=".Shop.Activity_Cart" />
         <activity android:name=".StartAnimate" />
         <activity android:name=".Emp.Activity_EmpHomePage" />
@@ -57,7 +58,7 @@
         <activity
             android:name=".Emp.Activity_Maps"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".HotelRoom.Activity_CredicardPay" />
+        <activity android:name=".HotelRoom.Activity_HotelCreditcardPay" />
         <activity android:name=".HotelRoom.Activity_HotelOrderPage" />
         <activity android:name=".Member.Activity_MemberLogin" />
         <activity android:name=".Emp.Activity_EmpLogin" />

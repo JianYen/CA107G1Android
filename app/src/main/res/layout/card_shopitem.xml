@@ -63,14 +63,14 @@
                     card_view:layout_constraintTop_toTopOf="parent"
                     card_view:layout_constraintVertical_bias="0.948" />
 
-                <Button
+                <ImageView
                     android:id="@+id/btnAddCart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="57dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
-                    android:text="addCart"
+                    android:src="@drawable/ic_addcart"
                     card_view:layout_constraintBottom_toBottomOf="parent"
                     card_view:layout_constraintEnd_toStartOf="@+id/ivBtn"
                     card_view:layout_constraintTop_toTopOf="parent" />
