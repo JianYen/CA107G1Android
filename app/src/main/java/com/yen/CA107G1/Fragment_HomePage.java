@@ -77,7 +77,7 @@ public class Fragment_HomePage extends Fragment {
         homePageBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
                 .setImages(list)
                 .isAutoPlay(true)
-                .setDelayTime(2000).start();
+                .setDelayTime(3000).start();
 
         return view;
     }

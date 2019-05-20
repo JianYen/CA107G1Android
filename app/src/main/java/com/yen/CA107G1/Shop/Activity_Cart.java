@@ -273,8 +273,8 @@ public class Activity_Cart extends AppCompatActivity {
                     cartVO.setQuantity(quantity);
                     showTotal(Util.CART);
                     Util.showToast(context,
-                            "數量" + " " +
-                                    cartVO.getQuantity());
+                            "已從購物車移除" + " " +
+                                    cartVO.getS_item_text());
                 }
 
                 @Override

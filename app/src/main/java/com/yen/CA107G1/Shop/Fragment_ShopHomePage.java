@@ -200,7 +200,7 @@ public class Fragment_ShopHomePage extends Fragment {
                                                 sb.append(text);
 
                                             }
-                                            message = "目前購物車有" + "\n 「" + team.getS_item_text() + "」";
+                                            message = "目前購物車有" + "\n 「" + team.getS_item_text() + "」"+sb.toString();
                                         }
                                     })
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {

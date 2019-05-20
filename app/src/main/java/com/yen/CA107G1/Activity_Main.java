@@ -244,9 +244,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         switch (menuItem.getItemId()) {
 
 
-            case R.id.nav_news:
 
-                break;
 
             case R.id.nav_myPet:
                 intent.setClass(Activity_Main.this, Activity_PetList.class);

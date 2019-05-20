@@ -70,7 +70,7 @@ public class Fragment_HotelPage extends Fragment {
         hotelBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
                 .setImages(list)
                 .isAutoPlay(true)
-                .setDelayTime(2000).start();
+                .setDelayTime(2500).start();
 
         return view;
     }
