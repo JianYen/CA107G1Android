@@ -22,9 +22,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
-
         android:background="#FFFFFF"
+
+        android:orientation="horizontal"
         android:padding="5dp"
         map:layout_constraintBottom_toBottomOf="parent"
         map:layout_constraintStart_toStartOf="parent">
@@ -34,9 +34,9 @@
             android:id="@+id/btSubmit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_alignParentRight="true"
             android:layout_marginRight="8dp"
+            android:layout_weight="1"
             android:onClick="onLocationNameClick"
             android:text="顯示地點"
             map:layout_constraintBottom_toBottomOf="parent"
@@ -48,10 +48,10 @@
 
         <Button
             android:id="@+id/startDirection"
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
+            android:layout_weight="1"
             android:onClick="startDirection"
             android:text="開始導航"
             map:layout_constraintBottom_toBottomOf="parent"

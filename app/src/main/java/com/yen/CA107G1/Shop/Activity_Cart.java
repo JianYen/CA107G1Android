@@ -1,6 +1,5 @@
 package com.yen.CA107G1.Shop;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,10 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,22 +21,16 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.yen.CA107G1.Activity_Main;
-import com.yen.CA107G1.HotelRoom.Activity_HotelRroomType_Detail;
 import com.yen.CA107G1.Member.Activity_MemberLogin;
 import com.yen.CA107G1.R;
 import com.yen.CA107G1.Server.CommonTask;
 import com.yen.CA107G1.Server.ServerURL;
 import com.yen.CA107G1.Server.ShopItemImgTask;
-import com.yen.CA107G1.Util.Page;
 import com.yen.CA107G1.Util.Util;
 import com.yen.CA107G1.VO.CartVO;
 import com.yen.CA107G1.VO.MemberVO;
-import com.yen.CA107G1.VO.ShopOrdDataVO;
 import com.yen.CA107G1.VO.ShopOrdVO;
 
-import java.sql.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -98,7 +88,7 @@ public class Activity_Cart extends AppCompatActivity {
         } else if (loginSPF.getBoolean("login", false) == true) {
             pref = getSharedPreferences(Util.PREF_FILE, MODE_PRIVATE);
             member = pref.getString("member", "");
-           gson = new GsonBuilder().setDateFormat("MMM d,yyyy HH:mm:ss aaa").create();
+            gson = new GsonBuilder().setDateFormat("MMM d,yyyy HH:mm:ss aaa").create();
             memberVO = gson.fromJson(member, MemberVO.class);
             memno = memberVO.getMem_no();
             if (Util.networkConnected(this)) {

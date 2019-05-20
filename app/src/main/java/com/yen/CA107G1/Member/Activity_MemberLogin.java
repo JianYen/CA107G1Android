@@ -41,7 +41,7 @@ public class Activity_MemberLogin extends AppCompatActivity {
     JsonObject jsonObject;
     String user, password;
     TextInputLayout tilMemId, tilMemPsw;
-    private ConstraintLayout loginConstraint ;
+    private ConstraintLayout loginConstraint;
 
 
     @Override
@@ -115,7 +115,7 @@ public class Activity_MemberLogin extends AppCompatActivity {
         if (isMember(user, password)) {
             String memPic64 = null;
             try {
-                memPic64 = new CallServlet().execute(ServerURL.MemberPic_URL, "action=memberPic&memAccount="+user+"&imageSize=300").get();
+                memPic64 = new CallServlet().execute(ServerURL.MemberPic_URL, "action=memberPic&memAccount=" + user + "&imageSize=300").get();
 //                memPic64 = new CallServlet().execute("http://10.0.2.2:8081/CA107G1/member/ImageLoad","action=memberPic&memAccount=abc123&imageSize=300").get();
             } catch (ExecutionException e) {
                 e.printStackTrace();
@@ -128,7 +128,7 @@ public class Activity_MemberLogin extends AppCompatActivity {
             sharedPreferences.edit().putBoolean("login", true)
                     .putString("userId", user)
                     .putString("password", password)
-                    .putString("memPic", memPic64 )
+                    .putString("memPic", memPic64)
                     .apply();
             Intent intent = new Intent(Activity_MemberLogin.this, Activity_Main.class);
             Bundle bundle = new Bundle();
@@ -145,7 +145,6 @@ public class Activity_MemberLogin extends AppCompatActivity {
         Intent intent = new Intent(Activity_MemberLogin.this, Activity_MemberRegister.class);
         startActivity(intent);
     }
-
 
 
 }

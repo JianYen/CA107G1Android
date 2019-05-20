@@ -154,7 +154,7 @@ public class Activity_Maps extends FragmentActivity implements OnMapReadyCallbac
             }
         }
 
-mMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
+        mMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
     }
 
     public void initOrder() {
@@ -474,7 +474,7 @@ mMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
 
     private class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
-        private  View infoWindow;
+        private View infoWindow;
 
         private MyInfoWindowAdapter() {
             infoWindow = LayoutInflater.from(Activity_Maps.this)
@@ -500,8 +500,6 @@ mMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
             return null;
         }
     }
-
-
 
 
 }

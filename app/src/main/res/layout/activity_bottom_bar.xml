@@ -3,14 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"/>
-
+        android:theme="@style/AppTheme.AppBarOverlay" />
 
 
     <android.support.design.widget.BottomNavigationView
@@ -18,6 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:menu="@menu/my_navigation"/>
+        app:menu="@menu/my_navigation" />
 
 </android.support.design.widget.CoordinatorLayout>

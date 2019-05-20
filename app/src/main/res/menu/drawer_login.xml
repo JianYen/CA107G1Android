@@ -8,7 +8,7 @@
 
         <item
             android:id="@+id/nav_myPet"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_dog"
             android:title="我的寵物" />
         <item
             android:id="@+id/nav_order"
@@ -18,12 +18,15 @@
 
         <item
             android:id="@+id/nav_cart"
-            android:title="購物車"/>
+            android:icon="@drawable/ic_cart"
+            android:title="購物車" />
 
-
+        <item
+            android:id="@+id/nav_aboutus"
+            android:icon="@drawable/ic_question"
+            android:title="關於我們" />
 
     </group>
-
 
 
 </menu>

@@ -3,36 +3,32 @@
 
 
     <group android:checkableBehavior="single">
-    <item
-        android:id="@+id/nav_mem"
-        android:icon="@drawable/ic_news"
-        android:title="最新消息" />
 
+        <item
+            android:id="@+id/nav_aboutus"
+            android:icon="@drawable/ic_aboutus"
+            android:title="關於我們" />
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/ic_news"
+            android:title="最新消息" />
     </group>
     <group>
-        <item
-            android:title=""/>
-        <item
-            android:title=""/>
-        <item
-            android:title=""/>
-        <item
-            android:title=""/>
-        <item
-            android:title=""/>
-        <item
-            android:title=""/>
-        <item
-            android:title=""/>
-        <item
-            android:title=""/>
+        <item android:title="" />
+        <item android:title="" />
+        <item android:title="" />
+        <item android:title="" />
+        <item android:title="" />
+        <item android:title="" />
+        <item android:title="" />
+        <item android:title="" />
 
     </group>
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/empLogin"
             android:icon="@drawable/ic_emp"
-            android:title="員工登入"/>
+            android:title="員工登入" />
     </group>
 
 </menu>

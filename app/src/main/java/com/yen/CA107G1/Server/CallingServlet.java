@@ -14,7 +14,6 @@ public class CallingServlet {
     private final static String TAG = "1212121211211212121";
 
 
-
     public static String getConnect(String url, String outStr) {
         HttpURLConnection con = null;
         StringBuilder inStr = new StringBuilder();

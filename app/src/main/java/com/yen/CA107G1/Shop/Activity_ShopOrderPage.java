@@ -16,7 +16,7 @@ import com.yen.CA107G1.VO.ShopOrdVO;
 
 public class Activity_ShopOrderPage extends AppCompatActivity {
     private EditText shopInfoET1, shopInfoET2, shopInfoET3;
-    private Button btnShopInfoMagic , btnShopInfoConfirm;
+    private Button btnShopInfoMagic, btnShopInfoConfirm;
     private SharedPreferences spf;
     private String order;
     private Gson gson;
@@ -30,14 +30,14 @@ public class Activity_ShopOrderPage extends AppCompatActivity {
         findViews();
     }
 
-    public void findViews(){
+    public void findViews() {
         shopInfoET1 = findViewById(R.id.shopInfoET1);
         shopInfoET2 = findViewById(R.id.shopInfoET2);
         shopInfoET3 = findViewById(R.id.shopInfoET3);
         btnShopInfoMagic = findViewById(R.id.btnShopInfoMagic);
         btnShopInfoConfirm = findViewById(R.id.btnShopInfoConfirm);
         spf = getSharedPreferences(Util.PREF_FILE, MODE_PRIVATE);
-        order = spf.getString("shopOrder","");
+        order = spf.getString("shopOrder", "");
         gson = new GsonBuilder().setDateFormat("MMM d,yyyy HH:mm:ss aaa").create();
         shopOrdVO = gson.fromJson(order, ShopOrdVO.class);
 
@@ -56,8 +56,8 @@ public class Activity_ShopOrderPage extends AppCompatActivity {
 
         shopOrdVO.setS_ord_address(infoAdd);
         String shopOrder = gson.toJson(shopOrdVO);
-        spf.edit().putString("shopOrder",shopOrder).apply();
-        Intent intent =new Intent(Activity_ShopOrderPage.this, Activity_ShopCreditcardPay.class);
+        spf.edit().putString("shopOrder", shopOrder).apply();
+        Intent intent = new Intent(Activity_ShopOrderPage.this, Activity_ShopCreditcardPay.class);
         startActivity(intent);
     }
 

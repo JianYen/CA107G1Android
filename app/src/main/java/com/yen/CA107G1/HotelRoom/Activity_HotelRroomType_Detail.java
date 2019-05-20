@@ -67,6 +67,7 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
                 .setSwipeBackView(R.layout.swipeback_default);
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -81,7 +82,7 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
 
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getMsg");
-            jsonObject.addProperty("roomTypeNo",hotelRoomTypeVO.getH_roomtype_no());
+            jsonObject.addProperty("roomTypeNo", hotelRoomTypeVO.getH_roomtype_no());
             String jsonOut = jsonObject.toString();
             updateUI(jsonOut);
         } else {
@@ -95,7 +96,8 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
 
         try {
             String jsonIn = getMsgTask.execute().get();
-            Type listType = new TypeToken<List<HotelroomtypemsgVO>>() {}.getType();
+            Type listType = new TypeToken<List<HotelroomtypemsgVO>>() {
+            }.getType();
             msgList = new Gson().fromJson(jsonIn, listType);
 
         } catch (Exception e) {
@@ -109,7 +111,6 @@ public class Activity_HotelRroomType_Detail extends AppCompatActivity {
         }
 
     }
-
 
 
     private byte[] Bitmap2Bytes(Bitmap bm) {

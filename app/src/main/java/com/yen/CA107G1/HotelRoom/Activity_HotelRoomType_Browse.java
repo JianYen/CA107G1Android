@@ -35,7 +35,6 @@ public class Activity_HotelRoomType_Browse extends AppCompatActivity {
     private RoomTypeImageTask roomTypeImageTask;
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +65,8 @@ public class Activity_HotelRoomType_Browse extends AppCompatActivity {
 
         try {
             String jsonIn = getRoomTypeTask.execute().get();
-            Type listType = new TypeToken<List<HotelRoomTypeVO>>() {}.getType();
+            Type listType = new TypeToken<List<HotelRoomTypeVO>>() {
+            }.getType();
             roomList = new Gson().fromJson(jsonIn, listType);
         } catch (Exception e) {
             Log.e(TAG, e.toString());

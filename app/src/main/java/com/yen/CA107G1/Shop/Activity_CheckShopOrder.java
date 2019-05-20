@@ -34,8 +34,6 @@ public class Activity_CheckShopOrder extends AppCompatActivity {
     }
 
 
-
-
     private class CheckShopOrderAdapter extends RecyclerView.Adapter<Activity_CheckShopOrder.CheckShopOrderAdapter.ViewHolder> {
         private List<ShopOrdVO> shopOrdVOList;
         private int imageSize;
@@ -78,7 +76,7 @@ public class Activity_CheckShopOrder extends AppCompatActivity {
             holder.tvOrderDate.setText(shopOrdVO.getOrder_time().toString());
 
             //一開始強制關閉CardView中的Adapter
-            if(holder.rvOrderDetail.getVisibility() != View.GONE ){
+            if (holder.rvOrderDetail.getVisibility() != View.GONE) {
                 holder.rvOrderDetail.setVisibility(View.GONE);
             }
             holder.rvOrderDetail.setLayoutManager(new LinearLayoutManager(context));

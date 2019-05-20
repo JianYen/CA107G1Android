@@ -88,7 +88,7 @@ public class Activity_EmpHomePage extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
         if (requestCode == 0) {
-            String contents =null;
+            String contents = null;
             String message = "";
             if (resultCode == RESULT_OK) {
                 contents = intent.getStringExtra("SCAN_RESULT");
@@ -119,7 +119,7 @@ public class Activity_EmpHomePage extends AppCompatActivity {
                         .setTitle("系統提示")
                         .setMessage("成功CheckIn囉!")
                         .setIcon(R.drawable.ic_check).show();
-            }else {
+            } else {
                 new AlertDialog.Builder(Activity_EmpHomePage.this)
                         .setTitle("系統提示")
                         .setMessage("Oooooops!,發生錯誤囉,請重新掃描")

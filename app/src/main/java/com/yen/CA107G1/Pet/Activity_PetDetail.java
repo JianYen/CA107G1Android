@@ -126,6 +126,7 @@ public class Activity_PetDetail extends AppCompatActivity {
     public void takePicClick(View view) {
         takePicture();
     }
+
     private void takePicture() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // 指定存檔路徑

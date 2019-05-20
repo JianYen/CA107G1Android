@@ -156,9 +156,9 @@ public class Activity_Member_Order extends AppCompatActivity {
             holder.orderAddress.setText(memberPetOrderVO.getH_ord_address());
             holder.orderNo.setText(memberPetOrderVO.getH_ord_no());
 
-            if(memberPetOrderVO.getH_ord_status_no()!=1){
-            holder.orderMemStatus.setText("未Check IN");
-            }else {
+            if (memberPetOrderVO.getH_ord_status_no() != 1) {
+                holder.orderMemStatus.setText("未Check IN");
+            } else {
                 holder.orderMemStatus.setText("已Check IN");
             }
 
@@ -179,10 +179,10 @@ public class Activity_Member_Order extends AppCompatActivity {
                         ImageView qrCode = new ImageView(Activity_Member_Order.this);
                         Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
                         qrCode.setImageBitmap(bitmap);
-                         new AlertDialog.Builder(Activity_Member_Order.this)
+                        new AlertDialog.Builder(Activity_Member_Order.this)
                                 .setMessage("請給店員掃描")
                                 .setView(qrCode).show();
-                    }catch (WriterException e){
+                    } catch (WriterException e) {
 
                     }
                 }

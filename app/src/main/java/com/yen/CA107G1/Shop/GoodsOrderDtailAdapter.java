@@ -14,13 +14,13 @@ import com.yen.CA107G1.VO.ShopOrdDataVO;
 
 import java.util.List;
 
-public class GoodsOrderDtailAdapter extends RecyclerView.Adapter<GoodsOrderDtailAdapter.ViewHolder>{
+public class GoodsOrderDtailAdapter extends RecyclerView.Adapter<GoodsOrderDtailAdapter.ViewHolder> {
     private int imageSize;
     private Context context;
     private LayoutInflater inflater;
     public List<ShopOrdDataVO> shopOrdDataVOList = null;
 
-    private GoodsOrderDtailAdapter(Context context, List<ShopOrdDataVO> shopOrdDataVOList){
+    private GoodsOrderDtailAdapter(Context context, List<ShopOrdDataVO> shopOrdDataVOList) {
         this.shopOrdDataVOList = shopOrdDataVOList;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -28,10 +28,9 @@ public class GoodsOrderDtailAdapter extends RecyclerView.Adapter<GoodsOrderDtail
 
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView ivGoodPic;
-        private TextView tvGoodName,tvGoodAmount,tvGoodPrice,tvGoodTotal;
-
+        private TextView tvGoodName, tvGoodAmount, tvGoodPrice, tvGoodTotal;
 
 
         public ViewHolder(@NonNull View view) {
@@ -57,8 +56,7 @@ public class GoodsOrderDtailAdapter extends RecyclerView.Adapter<GoodsOrderDtail
         holder.tvGoodName.setText(shopOrdDataVO.getS_item_no());
         holder.tvGoodPrice.setText(String.valueOf(shopOrdDataVO.getS_ord_price()));
         holder.tvGoodAmount.setText(String.valueOf(shopOrdDataVO.getS_ord_count()));
-        holder.tvGoodTotal.setText(String.valueOf(shopOrdDataVO.getS_ord_count()*shopOrdDataVO.getS_ord_price()));
-
+        holder.tvGoodTotal.setText(String.valueOf(shopOrdDataVO.getS_ord_count() * shopOrdDataVO.getS_ord_price()));
 
 
     }

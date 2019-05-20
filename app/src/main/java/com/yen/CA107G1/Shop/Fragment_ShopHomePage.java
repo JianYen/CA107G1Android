@@ -195,12 +195,12 @@ public class Fragment_ShopHomePage extends Fragment {
                                             }
                                             sb = new StringBuilder();
                                             for (CartVO cartProduct : Util.CART) {
-                                                String text = "\n-" + cartProduct.getS_item_text() + " x "
+                                                String text = "\n" + cartProduct.getS_item_text() + " x "
                                                         + cartProduct.getQuantity();
                                                 sb.append(text);
 
                                             }
-                                            message = "目前購物車有" + "\n 「" + team.getS_item_text() + "」"+sb.toString();
+                                            message = "目前購物車有" + "\n " + sb.toString() + "\n";
                                         }
                                     })
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {

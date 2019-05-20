@@ -47,7 +47,7 @@ public class Activity_HotelCreditcardPay extends AppCompatActivity {
         card6 = findViewById(R.id.card6);
 
         sharedPreferences = getSharedPreferences(Util.PREF_FILE, MODE_PRIVATE);
-        
+
     }
 
 
@@ -77,12 +77,12 @@ public class Activity_HotelCreditcardPay extends AppCompatActivity {
 
 
     public void magic(View view) {
-                card1.setText("3345");
-                card2.setText("6789");
-                card3.setText("5310");
-                card4.setText("0821");
-                card5.setText("01/24");
-                card6.setText("693");
+        card1.setText("3345");
+        card2.setText("6789");
+        card3.setText("5310");
+        card4.setText("0821");
+        card5.setText("01/24");
+        card6.setText("693");
     }
 
     public void btnCancelHotel(View view) {

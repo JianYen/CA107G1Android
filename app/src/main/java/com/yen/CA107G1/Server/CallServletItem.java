@@ -26,8 +26,6 @@ public class CallServletItem extends AsyncTask<String, Void, String> {
             con.setRequestMethod("POST");
 
 
-
-
             int responseCode = con.getResponseCode();
             if (responseCode == 200) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));

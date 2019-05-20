@@ -21,7 +21,7 @@ import com.yen.CA107G1.Server.ServerURL;
 import java.util.concurrent.ExecutionException;
 
 public class Activity_MemberRegister extends AppCompatActivity {
-private WebView webView;
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

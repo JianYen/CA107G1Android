@@ -58,16 +58,16 @@
                     android:id="@+id/btnShopInfoMagic"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:onClick="shopMagic"
-                    android:layout_gravity="right|bottom" />
+                    android:layout_gravity="right|bottom"
+                    android:onClick="shopMagic" />
 
                 <Button
                     android:id="@+id/btnShopInfoConfirm"
                     android:layout_width="100dp"
-                    android:onClick="goShopPay"
                     android:layout_height="50dp"
                     android:layout_gravity="right|bottom"
                     android:layout_weight="1"
+                    android:onClick="goShopPay"
                     android:text="確定送出" />
 
             </LinearLayout>
