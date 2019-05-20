@@ -245,7 +245,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
 
             case R.id.nav_news:
-                intent.setClass(Activity_Main.this, Activity_MyShopItem_Detail.class);
+
                 break;
 
             case R.id.nav_myPet:
